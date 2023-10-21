@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://wpukcnv3avlx"]
+
+[ext_resource type="PackedScene" uid="uid://c17wpcxkbfrdu" path="res://Scenes/Stages/Arena.tscn" id="1_pgvog"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage1/Stage1.gd" id="2_nvy20"]
+[ext_resource type="PackedScene" uid="uid://b1skxdskftdb1" path="res://Scenes/Stages/Stage1/Enemies/Leader1.tscn" id="3_c8iww"]
+[ext_resource type="PackedScene" uid="uid://cd0cno1ekyou0" path="res://Scenes/Stages/Stage1/Enemies/Goon1.tscn" id="4_qvgg7"]
+[ext_resource type="PackedScene" uid="uid://b824uqcknb74t" path="res://Scenes/Stages/Stage1/Enemies/enemy_1.tscn" id="5_7tnun"]
+[ext_resource type="PackedScene" uid="uid://dvwptqk41t5js" path="res://Scenes/Stages/Stage1/Enemies/leader_1_2.tscn" id="5_wt2c8"]
+[ext_resource type="PackedScene" uid="uid://dduc833iqy54o" path="res://Scenes/Stages/Stage1/Enemies/goon_1_2.tscn" id="6_bxdim"]
+[ext_resource type="PackedScene" uid="uid://dcbhqwmm602xl" path="res://Scenes/Stages/Stage1/lightning_1.tscn" id="6_xamib"]
+[ext_resource type="PackedScene" uid="uid://cpjtcgxgpm5s3" path="res://Scenes/Stages/Stage1/Enemies/booster_1.tscn" id="8_5mu7h"]
+[ext_resource type="PackedScene" uid="uid://b2dwhk54rb6ld" path="res://Scenes/Player/boss_arrow.tscn" id="10_1cinr"]
+[ext_resource type="Texture2D" uid="uid://b0u8ios80syqi" path="res://Assets/Stages/01/BackgroundFinal.png" id="12_w4fmh"]
+[ext_resource type="PackedScene" uid="uid://cdkxh7cx78vsl" path="res://Scenes/Stages/Stage1/Boss/boss_rework_1.tscn" id="13_hficm"]
+
+[node name="Arena" instance=ExtResource("1_pgvog")]
+script = ExtResource("2_nvy20")
+leader1 = ExtResource("3_c8iww")
+leader1_2 = ExtResource("5_wt2c8")
+goon1 = ExtResource("4_qvgg7")
+goon1_2 = ExtResource("6_bxdim")
+enemy1 = ExtResource("5_7tnun")
+booster1 = ExtResource("8_5mu7h")
+lightning1 = ExtResource("6_xamib")
+boss1 = ExtResource("13_hficm")
+bossArrow = ExtResource("10_1cinr")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+position = Vector2(10, 10)
+motion_mirroring = Vector2(2000, 1500)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_w4fmh")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+motion_mirroring = Vector2(2000, 1500)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_w4fmh")
+centered = false
+
+[node name="EnemySpawnTimer" parent="World" index="2"]
+wait_time = 2.0
+autostart = false
+
+[node name="EnemySpawnTimer2" type="Timer" parent="World" index="4"]
+wait_time = 0.5
+autostart = true
+
+[node name="EnemySpawnTimer3" type="Timer" parent="World" index="5"]
+
+[node name="LightningTimer" type="Timer" parent="World" index="6"]
+wait_time = 4.0
+
+[node name="BoostSpawnTimer" type="Timer" parent="World" index="7"]
+
+[node name="BoostEnableTimer" type="Timer" parent="World" index="8"]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="Lightnings" type="Node2D" parent="World" index="10"]
+
+[connection signal="timeout" from="World/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="World/WaveChangeTimer" to="." method="_on_wave_change_timer_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer2" to="." method="_on_enemy_spawn_timer_2_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer3" to="." method="_on_enemy_spawn_timer_3_timeout"]
+[connection signal="timeout" from="World/LightningTimer" to="." method="_on_lightning_timer_timeout"]
+[connection signal="timeout" from="World/BoostSpawnTimer" to="." method="_on_boost_spawn_timer_timeout"]
+[connection signal="timeout" from="World/BoostEnableTimer" to="." method="_on_boost_spawn_enable_timer_timeout"]

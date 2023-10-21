@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw8ov3b7a05fj"]
+
+[ext_resource type="Texture2D" uid="uid://buu1yf8spda7i" path="res://Assets/Stages/02/Boss/BossWallMushroom.png" id="1_cjowc"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_wall_part.gd" id="1_qmg8a"]
+[ext_resource type="Texture2D" uid="uid://d1fapq13xicji" path="res://Assets/Stages/02/SporeCloudAlt.png" id="2_cxi6y"]
+
+[sub_resource type="Gradient" id="Gradient_y1dic"]
+offsets = PackedFloat32Array(0, 0.147465, 0.497696, 0.852535, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.497474, 0.497474, 0.497474, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_7sv6i"]
+resource_name = "GrowWallPart"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 65), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pb5lt"]
+_data = {
+"GrowWallPart": SubResource("Animation_7sv6i")
+}
+
+[sub_resource type="Animation" id="Animation_jscpv"]
+resource_name = "BounceWallPart"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.263)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_46fkx"]
+_data = {
+"BounceWallPart": SubResource("Animation_jscpv")
+}
+
+[node name="BossWallPart" type="Node2D"]
+script = ExtResource("1_qmg8a")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 65)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_cjowc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 2.0
+local_coords = true
+texture = ExtResource("2_cxi6y")
+emission_shape = 2
+emission_sphere_radius = 100.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+angle_max = 360.0
+scale_amount_min = 0.4
+scale_amount_max = 1.2
+color_ramp = SubResource("Gradient_y1dic")
+
+[node name="Grower" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pb5lt")
+}
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_46fkx")
+}
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="animation_finished" from="Grower" to="." method="_on_grower_animation_finished"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

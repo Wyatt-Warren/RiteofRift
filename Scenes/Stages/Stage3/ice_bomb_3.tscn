@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnyvirbhwx5m"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage3/ice_bomb_3.gd" id="1_ksr2i"]
+[ext_resource type="Texture2D" uid="uid://c21thqufqqkw6" path="res://Assets/Stages/03/IceBomb.png" id="1_rxhw7"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="2_8yl0h"]
+[ext_resource type="PackedScene" uid="uid://bk2pkpbuj3we1" path="res://Scenes/Stages/Stage3/ice_zone_3.tscn" id="2_iaq0m"]
+
+[sub_resource type="Gradient" id="Gradient_cvmcw"]
+offsets = PackedFloat32Array(0, 0.281106, 0.599078, 0.769585, 0.986175)
+colors = PackedColorArray(1, 1, 1, 0, 0.582182, 0.994577, 1, 1, 0, 0.719471, 0.725597, 1, 0.045014, 0.636969, 0.999998, 1, 0, 0.402914, 0.731311, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8yvx"]
+radius = 18.1108
+
+[node name="IceBomb3" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_ksr2i")
+iceArea = ExtResource("2_iaq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_rxhw7")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.5
+texture = ExtResource("2_8yl0h")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 75.0
+initial_velocity_max = 100.0
+orbit_velocity_min = -0.25
+orbit_velocity_max = 0.25
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_cvmcw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_m8yvx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

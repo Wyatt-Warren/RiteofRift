@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://il1hor3j6wqb"]
+
+[ext_resource type="PackedScene" uid="uid://3nt7cu60uj2b" path="res://Scenes/Stages/Stage1/Boss/boss_1_part.tscn" id="1_0j41v"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage1/Boss/boss_1.gd" id="1_6g1b7"]
+[ext_resource type="PackedScene" uid="uid://b4lc01wwcwor8" path="res://Scenes/Stages/Stage1/Boss/boss_1_bullet.tscn" id="2_t4vkx"]
+[ext_resource type="PackedScene" uid="uid://dcbhqwmm602xl" path="res://Scenes/Stages/Stage1/lightning_1.tscn" id="3_f7hvm"]
+[ext_resource type="PackedScene" uid="uid://r2qvxvq8i5us" path="res://Scenes/Stages/Stage1/Boss/boss_1_walls.tscn" id="5_petxw"]
+[ext_resource type="PackedScene" uid="uid://dihyxbtk75wrr" path="res://Scenes/Stages/Stage1/Boss/boss_1_final_part.tscn" id="6_51xlk"]
+[ext_resource type="Texture2D" uid="uid://coqmxy86swmbm" path="res://Assets/Stages/01/Bullet1.png" id="7_yj8yd"]
+[ext_resource type="Texture2D" uid="uid://cgaus8rf8q302" path="res://Assets/Stages/01/Boss/BossWalls.png" id="8_oyh6a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4ws0"]
+radius = 850.0
+
+[sub_resource type="Gradient" id="Gradient_np71u"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Boss1" type="Node2D" groups=["Boss"]]
+y_sort_enabled = true
+script = ExtResource("1_6g1b7")
+bullet = ExtResource("2_t4vkx")
+lightning = ExtResource("3_f7hvm")
+walls = ExtResource("5_petxw")
+
+[node name="StartFightArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartFightArea"]
+shape = SubResource("CircleShape2D_c4ws0")
+
+[node name="Boss1Part" parent="." instance=ExtResource("1_0j41v")]
+position = Vector2(-200, 0)
+
+[node name="Boss1Part2" parent="." instance=ExtResource("1_0j41v")]
+position = Vector2(-100, -175)
+
+[node name="Boss1Part3" parent="." instance=ExtResource("1_0j41v")]
+position = Vector2(100, -175)
+
+[node name="Boss1Part4" parent="." instance=ExtResource("1_0j41v")]
+position = Vector2(200, 0)
+
+[node name="Boss1Part5" parent="." instance=ExtResource("1_0j41v")]
+position = Vector2(100, 175)
+
+[node name="Boss1Part6" parent="." instance=ExtResource("1_0j41v")]
+position = Vector2(-100, 175)
+
+[node name="Boss1FinalPart" parent="." instance=ExtResource("6_51xlk")]
+
+[node name="FlashParticles" type="CPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(-200, 0)
+emitting = false
+amount = 100
+lifetime = 0.2
+texture = ExtResource("7_yj8yd")
+emission_shape = 1
+emission_sphere_radius = 75.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 550.0
+color = Color(1, 1, 1, 0.501961)
+color_ramp = SubResource("Gradient_np71u")
+
+[node name="FlashParticlesFinal" type="CPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 100
+lifetime = 0.2
+texture = ExtResource("8_oyh6a")
+emission_shape = 1
+emission_sphere_radius = 60.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 550.0
+color = Color(1, 1, 1, 0.501961)
+color_ramp = SubResource("Gradient_np71u")
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="ShootTimer2" type="Timer" parent="."]
+wait_time = 0.75
+
+[node name="FastTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="StopFlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="SuckerDisableTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="StartFightArea" to="." method="_on_start_fight_area_body_entered"]
+[connection signal="shattered" from="Boss1Part" to="." method="_on_boss_1_part_shattered"]
+[connection signal="shattered" from="Boss1Part2" to="." method="_on_boss_1_part_2_shattered"]
+[connection signal="shattered" from="Boss1Part3" to="." method="_on_boss_1_part_3_shattered"]
+[connection signal="shattered" from="Boss1Part4" to="." method="_on_boss_1_part_4_shattered"]
+[connection signal="shattered" from="Boss1Part5" to="." method="_on_boss_1_part_5_shattered"]
+[connection signal="shattered" from="Boss1Part6" to="." method="_on_boss_1_part_6_shattered"]
+[connection signal="shattered" from="Boss1FinalPart" to="." method="_on_boss_1_final_part_shattered"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ShootTimer2" to="." method="_on_shoot_timer_2_timeout"]
+[connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]
+[connection signal="timeout" from="StopFlashTimer" to="." method="_on_stop_flash_timer_timeout"]
+[connection signal="timeout" from="SuckerDisableTimer" to="." method="_on_sucker_disable_timer_timeout"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnxyho18mte3p"]
+
+[ext_resource type="Script" path="res://Scenes/falling_guy.gd" id="1_x3wpk"]
+[ext_resource type="Texture2D" uid="uid://b0vdfxc2dfmpi" path="res://icon.png" id="2_ajrdg"]
+
+[node name="FallingGuy" type="Node2D"]
+script = ExtResource("1_x3wpk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_ajrdg")

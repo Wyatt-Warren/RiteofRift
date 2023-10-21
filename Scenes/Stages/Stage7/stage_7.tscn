@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dm7fo86tw7r1i"]
+
+[ext_resource type="PackedScene" uid="uid://c17wpcxkbfrdu" path="res://Scenes/Stages/Arena.tscn" id="1_jcniv"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage7/stage_7.gd" id="2_mc6w4"]
+[ext_resource type="Texture2D" uid="uid://c8sm13rs4paks" path="res://Assets/Stages/07/Background.png" id="2_r4r2y"]
+[ext_resource type="PackedScene" uid="uid://btlqdl7ie6x3x" path="res://Scenes/Stages/Stage7/Enemies/enemy_7.tscn" id="3_lk8cr"]
+[ext_resource type="PackedScene" uid="uid://dm7bwt8u2jtt8" path="res://Scenes/Stages/Stage7/Enemies/booster_7.tscn" id="4_pxh0s"]
+[ext_resource type="PackedScene" uid="uid://cc2ynqa8j23x4" path="res://Scenes/Stages/Stage7/Enemies/confuser_7.tscn" id="4_xsdnk"]
+[ext_resource type="PackedScene" uid="uid://f04xbsvcyxea" path="res://Scenes/Stages/Stage7/Enemies/mom_7.tscn" id="5_wt2cc"]
+
+[node name="Stage7" instance=ExtResource("1_jcniv")]
+script = ExtResource("2_mc6w4")
+enemy7 = ExtResource("3_lk8cr")
+confuser7 = ExtResource("4_xsdnk")
+mom7 = ExtResource("5_wt2cc")
+booster7 = ExtResource("4_pxh0s")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+position = Vector2(10, 10)
+motion_mirroring = Vector2(2000, 1500)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_r4r2y")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+motion_mirroring = Vector2(2000, 1500)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_r4r2y")
+centered = false
+
+[node name="EnemySpawnTimer" parent="World" index="2"]
+wait_time = 0.5
+
+[node name="EnemySpawnTimer2" type="Timer" parent="World" index="3"]
+wait_time = 2.0
+
+[node name="EnemySpawnTimer3" type="Timer" parent="World" index="4"]
+wait_time = 2.0
+
+[node name="BoostSpawnTimer" type="Timer" parent="World" index="6"]
+
+[node name="BoostEnableTimer" type="Timer" parent="World" index="7"]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="Beams" type="Node2D" parent="World" index="10"]
+
+[connection signal="timeout" from="World/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer2" to="." method="_on_enemy_spawn_timer_2_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer3" to="." method="_on_enemy_spawn_timer_3_timeout"]
+[connection signal="timeout" from="World/WaveChangeTimer" to="." method="_on_wave_change_timer_timeout"]
+[connection signal="timeout" from="World/BoostSpawnTimer" to="." method="_on_boost_spawn_timer_timeout"]
+[connection signal="timeout" from="World/BoostEnableTimer" to="." method="_on_boost_enable_timer_timeout"]

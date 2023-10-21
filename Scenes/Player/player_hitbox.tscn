@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmkfq3d6j3g1u"]
+
+[ext_resource type="Texture2D" uid="uid://1a4skptrn20o" path="res://Assets/Player/hitbox1.png" id="1_llxow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3dtm5"]
+radius = 250.0
+
+[sub_resource type="Animation" id="Animation_tuomc"]
+resource_name = "HitboxSpin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2nlq"]
+_data = {
+"HitboxSpin": SubResource("Animation_tuomc")
+}
+
+[sub_resource type="Animation" id="Animation_x2s6n"]
+resource_name = "HitAnimation"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.98, 1.972), Vector2(0, 0), Vector2(1.98, 1.972)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_142ic"]
+_data = {
+"HitAnimation": SubResource("Animation_x2s6n")
+}
+
+[node name="PlayerHitbox" type="Area2D" groups=["PlayerHitbox"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.50001, -1.5)
+rotation = 6.28319
+scale = Vector2(1.98, 1.972)
+texture = ExtResource("1_llxow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3dtm5")
+
+[node name="SpinAnimation" type="AnimationPlayer" parent="."]
+autoplay = "HitboxSpin"
+libraries = {
+"": SubResource("AnimationLibrary_e2nlq")
+}
+
+[node name="HitAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_142ic")
+}

@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvwptqk41t5js"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage1/Enemies/leader_1_2.gd" id="1_dhr70"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="2_khwqn"]
+[ext_resource type="PackedScene" uid="uid://b0tn4emgjhr2k" path="res://Scenes/Stages/Stage1/bullet_1.tscn" id="2_rdu1w"]
+[ext_resource type="Texture2D" uid="uid://2biy25nvurj5" path="res://Assets/Stages/01/Enemies/Leader1_2.png" id="3_i6wdg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7ypj"]
+radius = 34.0147
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_or6kx"]
+radius = 39.0
+
+[sub_resource type="Animation" id="Animation_yphlf"]
+resource_name = "Walking"
+length = 0.7
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(8, -47), Vector2(8, -37)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.22, 0.22), Vector2(0.22, 0.19)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(8, -47), Vector2(8, -37)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.22, 0.22), Vector2(0.22, 0.19)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0cmg8"]
+_data = {
+"Walking": SubResource("Animation_yphlf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bciia"]
+size = Vector2(380, 665)
+
+[node name="Leader1_2" type="RigidBody2D" groups=["Enemy", "Leader"]]
+collision_layer = 21
+collision_mask = 21
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_dhr70")
+bullet = ExtResource("2_rdu1w")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(8, -47)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("3_i6wdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_f7ypj")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="RunAwayArea" parent="." instance=ExtResource("2_khwqn")]
+visible = false
+scale = Vector2(0.3, 0.3)
+collision_layer = 4
+collision_mask = 4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_or6kx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_0cmg8")
+}
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(8, -47)
+scale = Vector2(0.22, 0.22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-15, -2.50002)
+shape = SubResource("RectangleShape2D_bciia")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,0 +1,147 @@
+[gd_scene load_steps=17 format=3 uid="uid://cgy1rkep7gfor"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage3/Enemies/enemy_3.gd" id="1_7ewag"]
+[ext_resource type="PackedScene" uid="uid://degit5f8l2qo7" path="res://Scenes/Stages/Stage3/bullet_3.tscn" id="2_qlymf"]
+[ext_resource type="Texture2D" uid="uid://cua0log3hha0k" path="res://Assets/Misc/Shadow.png" id="3_jmdgc"]
+[ext_resource type="Texture2D" uid="uid://dtxbkxfv3rsea" path="res://Assets/Stages/03/Enemies/gem3_0001.png" id="4_8urik"]
+[ext_resource type="Texture2D" uid="uid://dnmeewpqfbdhj" path="res://Assets/Stages/03/Enemies/gem3_0002.png" id="5_c55oy"]
+[ext_resource type="Texture2D" uid="uid://cn0y4topj7g56" path="res://Assets/Stages/03/Enemies/gem3_0003.png" id="6_q0hll"]
+[ext_resource type="Texture2D" uid="uid://rtdx6tlcg1ll" path="res://Assets/Stages/03/Enemies/gem3_0004.png" id="7_ihlpm"]
+[ext_resource type="Texture2D" uid="uid://c2glq8vnfyi2n" path="res://Assets/Stages/03/Enemies/gem3_0005.png" id="8_pg1ci"]
+[ext_resource type="Texture2D" uid="uid://qr2jcaemjrhd" path="res://Assets/Stages/03/Enemies/gem3_0006.png" id="9_q3smv"]
+[ext_resource type="Texture2D" uid="uid://cmadeqa4k3dep" path="res://Assets/Stages/03/Enemies/gem3_0007.png" id="10_lqevo"]
+[ext_resource type="Texture2D" uid="uid://cjnj8ytmer08c" path="res://Assets/Stages/03/Enemies/gem3_0008.png" id="11_0jy5e"]
+[ext_resource type="Texture2D" uid="uid://dg87at4be487" path="res://Assets/Stages/03/Enemies/gem3_0009.png" id="12_fpal8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_34f03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8urik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c55oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q0hll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ihlpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pg1ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_q3smv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lqevo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0jy5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fpal8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffyhx"]
+radius = 24.5153
+
+[sub_resource type="Animation" id="Animation_oahgu"]
+resource_name = "Bouncer"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -7), Vector2(0, -17)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -7), Vector2(0, -17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t55es"]
+_data = {
+"BounceGem": SubResource("Animation_oahgu")
+}
+
+[node name="Enemy3" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_7ewag")
+bullet = ExtResource("2_qlymf")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 31)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_jmdgc")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0.913725, 0.937255, 1)
+position = Vector2(0, -7)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_8urik")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0.913725, 0.937255, 1)
+position = Vector2(0, -7)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_34f03")
+autoplay = "default"
+frame_progress = 0.44455
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_ffyhx")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 8.0
+
+[node name="ShootTimer2" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "BounceGem"
+libraries = {
+"": SubResource("AnimationLibrary_t55es")
+}
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(0, -7)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(0, 31, 41, -4, 21, -27, 0, -31, -20, -26, -40, -5)
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ShootTimer2" to="." method="_on_shoot_timer_2_timeout"]

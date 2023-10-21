@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=3 uid="uid://bi7477xpc7tdm"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_2.gd" id="1_35qvx"]
+[ext_resource type="PackedScene" uid="uid://bbx0f3dcfaxcx" path="res://Scenes/Stages/Stage2/Boss/boss_2_part.tscn" id="1_ehf64"]
+[ext_resource type="PackedScene" uid="uid://cqeidet6xom1n" path="res://Scenes/Stages/Stage2/Boss/boss_2_walls.tscn" id="2_hv2q2"]
+[ext_resource type="PackedScene" uid="uid://byy77llg2l04p" path="res://Scenes/Stages/Stage2/Boss/boss_2_small.tscn" id="3_7eu2m"]
+[ext_resource type="PackedScene" uid="uid://plyh717sbri0" path="res://Scenes/Stages/Stage2/Boss/boss_2_bullet.tscn" id="4_iefgv"]
+[ext_resource type="Texture2D" uid="uid://bubgso3ulnwox" path="res://Assets/Stages/02/Boss/MushroomAnimSheet.png" id="6_68t44"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1w2n"]
+radius = 1000.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yco81"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ite6p"]
+offsets = PackedFloat32Array(0, 0.0368664, 0.760369, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Boss2" type="Node2D" groups=["Boss"]]
+script = ExtResource("1_35qvx")
+walls = ExtResource("2_hv2q2")
+small = ExtResource("3_7eu2m")
+boss2Bullet = ExtResource("4_iefgv")
+
+[node name="StartFightArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartFightArea"]
+shape = SubResource("CircleShape2D_r1w2n")
+
+[node name="Boss2Part" parent="." instance=ExtResource("1_ehf64")]
+position = Vector2(-150, 100)
+scale = Vector2(-1, 1)
+
+[node name="Boss2Part2" parent="." instance=ExtResource("1_ehf64")]
+position = Vector2(150, 100)
+
+[node name="Boss2Part3" parent="." instance=ExtResource("1_ehf64")]
+position = Vector2(150, -200)
+
+[node name="Boss2Part4" parent="." instance=ExtResource("1_ehf64")]
+position = Vector2(-150, -200)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="SpawnSmallTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MiddleShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="StartNextWaveTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CheckWaveEndTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="StopFlashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="PartShatteredParticles" type="CPUParticles2D" parent="."]
+z_index = 1
+material = SubResource("CanvasItemMaterial_yco81")
+position = Vector2(-150, 100)
+emitting = false
+amount = 150
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+texture = ExtResource("6_68t44")
+emission_shape = 3
+emission_rect_extents = Vector2(20, 30)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 550.0
+angle_max = 360.0
+scale_amount_min = 0.15
+scale_amount_max = 0.25
+color_ramp = SubResource("Gradient_ite6p")
+anim_offset_max = 1.0
+
+[connection signal="body_entered" from="StartFightArea" to="." method="_on_start_fight_area_body_entered"]
+[connection signal="shattered" from="Boss2Part" to="." method="_on_boss_2_part_shattered"]
+[connection signal="shattered" from="Boss2Part2" to="." method="_on_boss_2_part_2_shattered"]
+[connection signal="shattered" from="Boss2Part3" to="." method="_on_boss_2_part_3_shattered"]
+[connection signal="shattered" from="Boss2Part4" to="." method="_on_boss_2_part_4_shattered"]
+[connection signal="timeout" from="SpawnSmallTimer" to="." method="_on_spawn_small_timer_timeout"]
+[connection signal="timeout" from="MiddleShootTimer" to="." method="_on_middle_shoot_timer_timeout"]
+[connection signal="timeout" from="StartNextWaveTimer" to="." method="_on_start_next_wave_timer_timeout"]
+[connection signal="timeout" from="CheckWaveEndTimer" to="." method="_on_check_wave_end_timer_timeout"]
+[connection signal="timeout" from="StopFlashTimer" to="." method="_on_stop_flash_timer_timeout"]

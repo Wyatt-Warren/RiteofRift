@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxbphrtjpqp2k"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage3/fire_bomb_3.gd" id="1_c3p2k"]
+[ext_resource type="Texture2D" uid="uid://lfty5l27xsc1" path="res://Assets/Stages/03/FireBomb.png" id="1_onq78"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="1_ru51e"]
+[ext_resource type="PackedScene" uid="uid://clfw6msttiic0" path="res://Scenes/Stages/Stage3/fire_zone3.tscn" id="2_pji8u"]
+
+[sub_resource type="Gradient" id="Gradient_xd5k5"]
+offsets = PackedFloat32Array(0, 0.281106, 0.599078, 0.769585, 0.986175)
+colors = PackedColorArray(1, 0.897324, 0.741695, 0, 0.99754, 0.654204, 3.85046e-07, 1, 0.965097, 0.291155, 0, 1, 0.984314, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_phx2y"]
+radius = 18.1108
+
+[node name="FireBomb3" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_c3p2k")
+fireArea = ExtResource("2_pji8u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_onq78")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.5
+texture = ExtResource("1_ru51e")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 75.0
+initial_velocity_max = 100.0
+orbit_velocity_min = -0.25
+orbit_velocity_max = 0.25
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_xd5k5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_phx2y")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

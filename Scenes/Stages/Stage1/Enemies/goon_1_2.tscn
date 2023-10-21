@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dduc833iqy54o"]
+
+[ext_resource type="PackedScene" uid="uid://cd0cno1ekyou0" path="res://Scenes/Stages/Stage1/Enemies/Goon1.tscn" id="1_76cw5"]
+[ext_resource type="Texture2D" uid="uid://dyhcx1ajuhjdo" path="res://Assets/Stages/01/Enemies/Goon1_2.png" id="2_831g6"]
+
+[node name="Goon1_2" instance=ExtResource("1_76cw5")]
+
+[node name="EnemySprite" parent="." index="0"]
+texture = ExtResource("2_831g6")
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "Walking1"

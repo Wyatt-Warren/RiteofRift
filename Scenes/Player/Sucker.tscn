@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw6y23w8mhnus"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Sucker.gd" id="1_byt6i"]
+[ext_resource type="Texture2D" uid="uid://dr7gg4mts7q33" path="res://Assets/Player/Sucker/Particles/particle01.png" id="3_2h20v"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qt662"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_6v2st"]
+offsets = PackedFloat32Array(0, 0.202797, 0.79021, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658824, 0.658824, 0.658824, 0.831373, 0.321728, 0.321728, 0.321728, 0)
+
+[node name="Sucker" type="Area2D" groups=["Sucker"]]
+z_index = 1
+collision_layer = 97
+collision_mask = 97
+script = ExtResource("1_byt6i")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["Sucker"]]
+polygon = PackedVector2Array(0, 0, 248, 96, 280, 0, 248, -96)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_qt662")
+amount = 70
+lifetime = 0.55
+preprocess = 0.55
+local_coords = true
+draw_order = 1
+texture = ExtResource("3_2h20v")
+emission_shape = 5
+emission_points = PackedVector2Array(248, -88, 248, 88, 256, 72, 256, -72, 264, 56, 264, -56, 264, 40, 264, -40, 264, 24, 264, -24, 272, 8, 272, -8)
+emission_normals = PackedVector2Array(0.942, -0.334, 0.942, 0.334, 0.963, 0.271, 0.963, -0.271, 0.978, 0.208, 0.978, -0.208, 0.989, 0.15, 0.989, -0.15, 0.996, 0.091, 0.996, -0.091, 0.999, 0.029, 0.999, -0.029)
+emission_colors = PackedColorArray()
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 450.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+angle_max = 360.0
+scale_amount_min = 0.04
+scale_amount_max = 0.06
+color_ramp = SubResource("Gradient_6v2st")
+anim_offset_max = 0.25
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

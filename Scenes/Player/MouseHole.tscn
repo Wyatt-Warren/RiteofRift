@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://3w0lddk5yune"]
+
+[ext_resource type="Script" path="res://Scenes/Player/MouseHole.gd" id="1_7ta2x"]
+[ext_resource type="PackedScene" uid="uid://cqhl14wc25qsu" path="res://Scenes/Player/GrenadeHole.tscn" id="1_nrwr3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_friqg"]
+radius = 1500.0
+
+[node name="MouseHole" type="CharacterBody2D" groups=["Mouse Hole"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_7ta2x")
+grenadeHole = ExtResource("1_nrwr3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.01, 0.01)
+shape = SubResource("CircleShape2D_friqg")

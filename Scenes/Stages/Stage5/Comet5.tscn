@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk45gvxs65p3y"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/Comet5.gd" id="1_byhnm"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="1_jnadn"]
+[ext_resource type="Texture2D" uid="uid://ckhc8wvpk8kqe" path="res://Assets/Stages/05/Star5.png" id="1_tlioo"]
+
+[sub_resource type="Gradient" id="Gradient_d5iv2"]
+offsets = PackedFloat32Array(0, 0.0921659, 0.571429, 0.894009, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_xt4jb"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.396078)
+
+[sub_resource type="Animation" id="Animation_467cs"]
+resource_name = "SpinComet"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Star5:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lfunv"]
+_data = {
+"SpinComet": SubResource("Animation_467cs")
+}
+
+[node name="Comet5" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_byhnm")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+amount = 128
+lifetime = 0.75
+texture = ExtResource("1_jnadn")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color = Color(0.701961, 1, 1, 1)
+color_ramp = SubResource("Gradient_d5iv2")
+color_initial_ramp = SubResource("Gradient_xt4jb")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 128
+texture = ExtResource("1_tlioo")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color = Color(0.701961, 1, 1, 1)
+color_ramp = SubResource("Gradient_d5iv2")
+color_initial_ramp = SubResource("Gradient_xt4jb")
+
+[node name="Star5" type="Sprite2D" parent="."]
+modulate = Color(0.396078, 0.980392, 1, 1)
+rotation = 0.0334156
+texture = ExtResource("1_tlioo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 0.0334156
+polygon = PackedVector2Array(-54, -54, 0, -27, 54, -54, 27, 0, 53, 53, 0, 27, -53, 53, -26, 0)
+
+[node name="Rotator" type="AnimationPlayer" parent="."]
+autoplay = "SpinComet"
+libraries = {
+"": SubResource("AnimationLibrary_lfunv")
+}
+
+[node name="DamageTimer" type="Timer" parent="."]
+one_shot = true

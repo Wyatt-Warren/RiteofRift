@@ -1,0 +1,128 @@
+[gd_scene load_steps=9 format=3 uid="uid://cu680c056epfe"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage4/Enemies/mitosis_4.gd" id="1_60lfe"]
+[ext_resource type="Texture2D" uid="uid://6we8vmnhv6g3" path="res://Assets/Stages/04/Enemies/Mitosis4.png" id="1_x7uyj"]
+[ext_resource type="PackedScene" uid="uid://dyyfgfuvs4qcn" path="res://Scenes/Stages/Stage4/bullet_4.tscn" id="2_etw61"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7hpib"]
+radius = 19.0
+height = 68.0
+
+[sub_resource type="Animation" id="Animation_81i6q"]
+resource_name = "Walking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-2, -5), Vector2(-2, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.19, 0.2), Vector2(0.21, 0.175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-2, -5), Vector2(-2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.19, 0.2), Vector2(0.21, 0.175)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_udprm"]
+_data = {
+"Walking": SubResource("Animation_81i6q")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8bykl"]
+radius = 85.0415
+height = 431.203
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_82dby"]
+radius = 168.421
+
+[node name="Mitosis4" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_60lfe")
+bullet = ExtResource("2_etw61")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(-2, -5)
+scale = Vector2(0.19, 0.2)
+texture = ExtResource("1_x7uyj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, 12)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7hpib")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_udprm")
+}
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="SplitTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(-2, -5)
+scale = Vector2(0.19, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(5.07501, 93.9496)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8bykl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(15.7895, -5)
+shape = SubResource("CircleShape2D_82dby")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="SplitTimer" to="." method="_on_split_timer_timeout"]

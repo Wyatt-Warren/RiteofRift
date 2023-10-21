@@ -1,0 +1,257 @@
+[gd_scene load_steps=18 format=3 uid="uid://bjf6l1g1ggbx7"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage6/Boss/boss_6.gd" id="1_56gbl"]
+[ext_resource type="Texture2D" uid="uid://dkxdhytoamtxn" path="res://Assets/Stages/06/Boss/Boss6.png" id="1_iyihc"]
+[ext_resource type="Texture2D" uid="uid://cbwe676y7gnaj" path="res://Assets/Stages/06/Boss/Boss6Spinner.png" id="2_e6uxc"]
+[ext_resource type="PackedScene" uid="uid://by0j8nw17vucv" path="res://Scenes/Stages/Stage6/Boss/boss_6_fragment_1.tscn" id="2_ls04g"]
+[ext_resource type="PackedScene" uid="uid://fbw241n1dwgx" path="res://Scenes/Stages/Stage6/Boss/boss_6_fragment_2.tscn" id="3_dr5s6"]
+[ext_resource type="PackedScene" uid="uid://bptjq8awlcu4c" path="res://Scenes/Stages/Stage6/bullet_6.tscn" id="4_5t4kj"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="4_wy31c"]
+[ext_resource type="Texture2D" uid="uid://ckhc8wvpk8kqe" path="res://Assets/Stages/05/Star5.png" id="5_kkcm7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvkst"]
+radius = 93.0
+height = 226.0
+
+[sub_resource type="Animation" id="Animation_pbi8g"]
+resource_name = "SpinSpinners"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Spinners:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qdvb8"]
+_data = {
+"SpinSpinners": SubResource("Animation_pbi8g")
+}
+
+[sub_resource type="Animation" id="Animation_6bdl4"]
+resource_name = "BounceBoss"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j353l"]
+_data = {
+"BounceBoss": SubResource("Animation_6bdl4")
+}
+
+[sub_resource type="Animation" id="Animation_46gb8"]
+resource_name = "ShakeBoss"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/BossSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -44), Vector2(-10, -44), Vector2(10, -44)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionPolygon2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, 0), Vector2(10, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0xkn"]
+_data = {
+"ShakeBoss": SubResource("Animation_46gb8")
+}
+
+[sub_resource type="Gradient" id="Gradient_svlib"]
+offsets = PackedFloat32Array(0, 0.248908, 0.624454, 0.838428, 0.986175)
+colors = PackedColorArray(1, 1, 1, 0, 0.582182, 0.994577, 1, 1, 0, 0.719471, 0.725597, 1, 0.045014, 0.636969, 0.999998, 1, 0, 0.402914, 0.731311, 0)
+
+[sub_resource type="Gradient" id="Gradient_x0cr1"]
+offsets = PackedFloat32Array(0, 0.391705)
+colors = PackedColorArray(1, 1, 1, 1, 0.666667, 1, 1, 1)
+
+[node name="Boss6" type="StaticBody2D" groups=["Boss"]]
+collision_layer = 33
+collision_mask = 33
+script = ExtResource("1_56gbl")
+fragment1 = ExtResource("2_ls04g")
+fragment2 = ExtResource("3_dr5s6")
+bullet = ExtResource("4_5t4kj")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="BossSprite" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -44)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_iyihc")
+
+[node name="Spinners" type="Node2D" parent="Sprites"]
+position = Vector2(-2.98023e-08, -32)
+
+[node name="Node2D" type="Node2D" parent="Sprites/Spinners"]
+
+[node name="Boss6Spinner" type="Sprite2D" parent="Sprites/Spinners/Node2D"]
+position = Vector2(175, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_e6uxc")
+
+[node name="Node2D2" type="Node2D" parent="Sprites/Spinners"]
+rotation = 1.0472
+
+[node name="Boss6Spinner" type="Sprite2D" parent="Sprites/Spinners/Node2D2"]
+position = Vector2(175, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_e6uxc")
+
+[node name="Node2D3" type="Node2D" parent="Sprites/Spinners"]
+rotation = 2.0944
+
+[node name="Boss6Spinner" type="Sprite2D" parent="Sprites/Spinners/Node2D3"]
+position = Vector2(175, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_e6uxc")
+
+[node name="Node2D4" type="Node2D" parent="Sprites/Spinners"]
+rotation = 3.14159
+
+[node name="Boss6Spinner" type="Sprite2D" parent="Sprites/Spinners/Node2D4"]
+position = Vector2(175, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_e6uxc")
+
+[node name="Node2D5" type="Node2D" parent="Sprites/Spinners"]
+rotation = 4.18879
+
+[node name="Boss6Spinner" type="Sprite2D" parent="Sprites/Spinners/Node2D5"]
+position = Vector2(175, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_e6uxc")
+
+[node name="Node2D6" type="Node2D" parent="Sprites/Spinners"]
+rotation = 5.23599
+
+[node name="Boss6Spinner" type="Sprite2D" parent="Sprites/Spinners/Node2D6"]
+position = Vector2(175, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_e6uxc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-3, -19)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_uvkst")
+
+[node name="Spinner" type="AnimationPlayer" parent="."]
+autoplay = "SpinSpinners"
+libraries = {
+"": SubResource("AnimationLibrary_qdvb8")
+}
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+autoplay = "BounceBoss"
+libraries = {
+"": SubResource("AnimationLibrary_j353l")
+}
+
+[node name="Shaker" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a0xkn")
+}
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ShatteredParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, -35)
+emitting = false
+amount = 64
+lifetime = 0.25
+one_shot = true
+explosiveness = 0.6
+texture = ExtResource("4_wy31c")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1500.0
+angle_max = 360.0
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_svlib")
+
+[node name="ShatteredParticles2" type="CPUParticles2D" parent="."]
+position = Vector2(0, -35)
+emitting = false
+amount = 64
+lifetime = 0.25
+one_shot = true
+explosiveness = 0.6
+texture = ExtResource("5_kkcm7")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1500.0
+angular_velocity_min = -400.0
+angular_velocity_max = 400.0
+angle_max = 360.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_x0cr1")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["BossHitbox"]]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-115, -144, -45, -85, 44, -74, 125, -106, 116, 0, 64, 66, 0, 80, -88, 50, -132, -21, -139, -99)
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

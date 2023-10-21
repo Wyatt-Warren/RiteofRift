@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://f1uq0iahestb"]
+
+[ext_resource type="Texture2D" uid="uid://bxxw3wcdk2dy2" path="res://Assets/Stages/02/Boss/Boss2Clump1.png" id="1_8x7cx"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_1.gd" id="1_qvtxh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we2ar"]
+radius = 19.2354
+
+[node name="Boss2Fragment1" type="RigidBody2D" groups=["Enemy"]]
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_qvtxh")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -5.96046e-08)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_8x7cx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_we2ar")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_we2ar")

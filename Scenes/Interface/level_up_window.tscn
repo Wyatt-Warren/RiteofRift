@@ -1,0 +1,306 @@
+[gd_scene load_steps=35 format=3 uid="uid://dugijelfcsiub"]
+
+[ext_resource type="Script" path="res://Scenes/Interface/level_up_window.gd" id="1_cc30p"]
+[ext_resource type="PackedScene" uid="uid://cie5qugafsido" path="res://Scenes/Interface/UpgradeButtons/max_health_upgrade_button.tscn" id="2_bmssl"]
+[ext_resource type="PackedScene" uid="uid://d1lj1g00h3lxu" path="res://Scenes/Interface/UpgradeButtons/movement_speed_upgrade_button.tscn" id="3_114h2"]
+[ext_resource type="PackedScene" uid="uid://ctc7kn4p7txhj" path="res://Scenes/Interface/UpgradeButtons/health_regen_speed_button.tscn" id="3_awgq3"]
+[ext_resource type="PackedScene" uid="uid://dmq4v84yoayra" path="res://Scenes/Interface/UpgradeButtons/sucker_count_upgrade_button.tscn" id="4_5e5sh"]
+[ext_resource type="PackedScene" uid="uid://dfst72xft67nt" path="res://Scenes/Interface/UpgradeButtons/sucker_range_upgrade_button.tscn" id="5_q4bys"]
+[ext_resource type="PackedScene" uid="uid://ccetnq1m1s73f" path="res://Scenes/Interface/UpgradeButtons/grenade_fire_speed_upgrade_button.tscn" id="6_02p35"]
+[ext_resource type="PackedScene" uid="uid://bcalpkqbn734w" path="res://Scenes/Interface/UpgradeButtons/grenade_rotation_speed.tscn" id="7_m7tkp"]
+[ext_resource type="PackedScene" uid="uid://ctaglgpcq2trq" path="res://Scenes/Interface/UpgradeButtons/grenade_sucker_count_upgrade_button.tscn" id="8_ld4cu"]
+[ext_resource type="PackedScene" uid="uid://df0lvlj7nrl6u" path="res://Scenes/Interface/UpgradeButtons/grenade_sucker_range_upgrade_button.tscn" id="9_o654k"]
+[ext_resource type="PackedScene" uid="uid://bf8lkp7u2pk80" path="res://Scenes/Interface/UpgradeButtons/mouse_hole_rotation_speed_upgrade_button.tscn" id="10_c317q"]
+[ext_resource type="PackedScene" uid="uid://dpua0w5xh8hxr" path="res://Scenes/Interface/UpgradeButtons/mouse_hole_speed_upgrade_button.tscn" id="11_afqtx"]
+[ext_resource type="PackedScene" uid="uid://ctojnpd08qav" path="res://Scenes/Interface/UpgradeButtons/mouse_hole_sucker_count_upgrade_button.tscn" id="12_24848"]
+[ext_resource type="PackedScene" uid="uid://cadrvotl1sou" path="res://Scenes/Interface/UpgradeButtons/mouse_hole_sucker_range_upgrade_button.tscn" id="13_y1bcq"]
+[ext_resource type="PackedScene" uid="uid://bv1bmc8mcd53" path="res://Scenes/Interface/UpgradeButtons/fire_hole_rotation_speed_upgrade_button.tscn" id="15_pofsy"]
+[ext_resource type="PackedScene" uid="uid://bn2p6488y7qjx" path="res://Scenes/Interface/UpgradeButtons/fire_hole_firing_speed_upgrade_button.tscn" id="16_oan7p"]
+[ext_resource type="PackedScene" uid="uid://c2qfapgkk2ccx" path="res://Scenes/Interface/UpgradeButtons/fire_hole_sucker_count_upgrade_button.tscn" id="17_gspta"]
+[ext_resource type="PackedScene" uid="uid://dint1up6hqfn0" path="res://Scenes/Interface/UpgradeButtons/fire_hole_sucker_range_upgrade_button.tscn" id="18_3dabc"]
+[ext_resource type="Texture2D" uid="uid://b5hvsypmmm00h" path="res://Assets/UI/Level Up Screen/Background.png" id="19_1llfn"]
+[ext_resource type="Texture2D" uid="uid://dr7gg4mts7q33" path="res://Assets/Player/Sucker/Particles/particle01.png" id="19_8872p"]
+[ext_resource type="PackedScene" uid="uid://dfag12eo82nsl" path="res://Scenes/Interface/level_up_rune.tscn" id="19_bovl8"]
+[ext_resource type="PackedScene" uid="uid://b25jpdw54guxs" path="res://Scenes/Interface/UnlockButton.tscn" id="21_dug2u"]
+[ext_resource type="Texture2D" uid="uid://dev1xoq8opkes" path="res://Assets/UI/Level Up Screen/CloneRune.png" id="22_1yfe5"]
+[ext_resource type="Texture2D" uid="uid://cdfpp2tae8x1y" path="res://Assets/UI/Level Up Screen/ShotRuneBig.png" id="23_6fi7n"]
+[ext_resource type="Texture2D" uid="uid://c5job2ums4r2u" path="res://Assets/UI/Level Up Screen/LaunchRune.png" id="23_sfysv"]
+[ext_resource type="Texture2D" uid="uid://djpvjdxrdk05k" path="res://Assets/UI/Level Up Screen/CloneRuneBig.png" id="25_2ss05"]
+[ext_resource type="Texture2D" uid="uid://crrax6chard0i" path="res://Assets/UI/Level Up Screen/LaunchRuneBig.png" id="27_kv3lc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fb36h"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Animation" id="Animation_7xq7f"]
+resource_name = "SpinRunes"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/UnlockBox/GrenadeButton/SpinningGrenadeRune:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/UnlockBox/GrenadeButton/SpinningGrenadeRune:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6ohn"]
+_data = {
+"SpinGrenade": SubResource("Animation_7xq7f")
+}
+
+[sub_resource type="Animation" id="Animation_x1svl"]
+resource_name = "SpinMouse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/UnlockBox/MouseHoleButton/SpinningeMouseHoleRune:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/UnlockBox/MouseHoleButton/SpinningeMouseHoleRune:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7186b"]
+_data = {
+"SpinMouse": SubResource("Animation_x1svl")
+}
+
+[sub_resource type="Animation" id="Animation_4w8hw"]
+resource_name = "SpinFire"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/UnlockBox/FireHoleButton/SpinningFireHoleRune:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/UnlockBox/FireHoleButton/SpinningFireHoleRune:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y5fo5"]
+_data = {
+"SpinFire": SubResource("Animation_4w8hw")
+}
+
+[node name="LevelUpWindow" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cc30p")
+maxHealthButton = ExtResource("2_bmssl")
+healthRegenSpeedButton = ExtResource("3_awgq3")
+movementSpeedButton = ExtResource("3_114h2")
+suckerCountButton = ExtResource("4_5e5sh")
+suckerRangeButton = ExtResource("5_q4bys")
+grenadeFireSpeedButton = ExtResource("6_02p35")
+grenadeRotationSpeedButton = ExtResource("7_m7tkp")
+grenadeSuckerCountButon = ExtResource("8_ld4cu")
+grenadeSuckerRangeButton = ExtResource("9_o654k")
+mouseHoleRotationButton = ExtResource("10_c317q")
+mouseHoleSpeedButton = ExtResource("11_afqtx")
+mouseHoleSuckerCountButton = ExtResource("12_24848")
+mouseHoleSuckerRangeButton = ExtResource("13_y1bcq")
+fireHoleRotationButton = ExtResource("15_pofsy")
+fireHoleFireSpeedButton = ExtResource("16_oan7p")
+fireHoleSuckerCountButton = ExtResource("17_gspta")
+fireHoleSuckerRangeButton = ExtResource("18_3dabc")
+levelUpRune = ExtResource("19_bovl8")
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.223529)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_fb36h")
+position = Vector2(960, 0)
+amount = 1000
+texture = ExtResource("19_8872p")
+emission_shape = 3
+emission_rect_extents = Vector2(960, 1)
+direction = Vector2(0, 1)
+initial_velocity_min = 900.0
+initial_velocity_max = 1500.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+anim_offset_max = 0.25
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_1llfn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -52.0
+offset_right = 78.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="UpgradeBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="UnlockBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="GrenadeButton" parent="HBoxContainer/UnlockBox" instance=ExtResource("21_dug2u")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MouseHoleButton")
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.54902, 0.478431, 1)
+theme_override_colors/font_hover_color = Color(1, 0.847059, 0.819608, 1)
+theme_override_colors/font_focus_color = Color(1, 0.847059, 0.819608, 1)
+text = "Unlocks at level 10  "
+
+[node name="SpinningGrenadeRune" type="Sprite2D" parent="HBoxContainer/UnlockBox/GrenadeButton"]
+visible = false
+position = Vector2(281, 50)
+rotation = 3.64725
+scale = Vector2(0.2352, 0.2352)
+texture = ExtResource("23_6fi7n")
+
+[node name="MouseHoleButton" parent="HBoxContainer/UnlockBox" instance=ExtResource("21_dug2u")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../GrenadeButton")
+focus_neighbor_bottom = NodePath("../FireHoleButton")
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.54902, 0.478431, 1)
+theme_override_colors/font_hover_color = Color(1, 0.847059, 0.819608, 1)
+theme_override_colors/font_focus_color = Color(1, 0.847059, 0.819608, 1)
+text = "Unlocks at level 20  "
+icon = ExtResource("22_1yfe5")
+
+[node name="SpinningeMouseHoleRune" type="Sprite2D" parent="HBoxContainer/UnlockBox/MouseHoleButton"]
+visible = false
+position = Vector2(281, 50)
+rotation = 5.43654
+scale = Vector2(0.203631, 0.203631)
+texture = ExtResource("25_2ss05")
+
+[node name="FireHoleButton" parent="HBoxContainer/UnlockBox" instance=ExtResource("21_dug2u")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MouseHoleButton")
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.54902, 0.478431, 1)
+theme_override_colors/font_hover_color = Color(1, 0.847059, 0.819608, 1)
+theme_override_colors/font_focus_color = Color(1, 0.847059, 0.819608, 1)
+text = "Unlocks at level 30  "
+icon = ExtResource("23_sfysv")
+
+[node name="SpinningFireHoleRune" type="Sprite2D" parent="HBoxContainer/UnlockBox/FireHoleButton"]
+visible = false
+position = Vector2(281, 50)
+rotation = 5.64947
+scale = Vector2(0.202035, 0.202035)
+texture = ExtResource("27_kv3lc")
+
+[node name="ParticleTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="GrenadeAnimator" type="AnimationPlayer" parent="."]
+autoplay = "SpinGrenade"
+libraries = {
+"": SubResource("AnimationLibrary_h6ohn")
+}
+
+[node name="MouseAnimator" type="AnimationPlayer" parent="."]
+autoplay = "SpinMouse"
+libraries = {
+"": SubResource("AnimationLibrary_7186b")
+}
+
+[node name="FireAnimator" type="AnimationPlayer" parent="."]
+autoplay = "SpinFire"
+libraries = {
+"": SubResource("AnimationLibrary_y5fo5")
+}
+
+[connection signal="pressed" from="HBoxContainer/UnlockBox/GrenadeButton" to="." method="_on_grenade_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/UnlockBox/MouseHoleButton" to="." method="_on_mouse_hole_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/UnlockBox/FireHoleButton" to="." method="_on_fire_hole_button_pressed"]
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

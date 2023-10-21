@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://by0j8nw17vucv"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage6/Boss/boss_6_fragment_1.gd" id="1_x2mhu"]
+[ext_resource type="Texture2D" uid="uid://cbwe676y7gnaj" path="res://Assets/Stages/06/Boss/Boss6Spinner.png" id="2_mls8b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7r2yu"]
+radius = 27.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_urtky"]
+radius = 19.0
+height = 58.0
+
+[node name="Boss6Fragment1" type="RigidBody2D" groups=["Enemy"]]
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_x2mhu")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mls8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_7r2yu")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(3, 0)
+shape = SubResource("CapsuleShape2D_urtky")

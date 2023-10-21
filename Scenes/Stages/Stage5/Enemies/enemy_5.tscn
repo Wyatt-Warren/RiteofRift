@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckh82xtj7q8kb"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/Enemies/enemy_5.gd" id="1_q4u7q"]
+[ext_resource type="Texture2D" uid="uid://cijiqwidl44dg" path="res://Assets/Stages/05/Enemies/Enemy5.png" id="2_bydph"]
+[ext_resource type="PackedScene" uid="uid://6kn1vbcf4wyd" path="res://Scenes/Stages/Stage5/bullet_5.tscn" id="2_wg5dv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbaqj"]
+radius = 38.0
+
+[node name="Enemy5" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_q4u7q")
+bullet = ExtResource("2_wg5dv")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_bydph")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_fbaqj")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 12.0
+
+[node name="ShootTimer2" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_fbaqj")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ShootTimer2" to="." method="_on_shoot_timer_2_timeout"]

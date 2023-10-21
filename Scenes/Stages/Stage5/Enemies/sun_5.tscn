@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5hdm3euia1mh"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/Enemies/sun_5.gd" id="1_aacrs"]
+[ext_resource type="Texture2D" uid="uid://dw1y0saek0daa" path="res://Assets/Stages/05/Enemies/Sun5.png" id="1_clq1t"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="1_cns8g"]
+[ext_resource type="PackedScene" uid="uid://dbhifdtrcneol" path="res://Scenes/Stages/Stage5/sun_5_bullet.tscn" id="2_6w27l"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="2_bbnvg"]
+
+[sub_resource type="Gradient" id="Gradient_fitxw"]
+offsets = PackedFloat32Array(0, 0.737327, 1)
+colors = PackedColorArray(0.722396, 0.980457, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14hp8"]
+radius = 42.0119
+
+[node name="Sun5" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 29
+collision_mask = 29
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_aacrs")
+bullet = ExtResource("2_6w27l")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 150
+lifetime = 0.4
+local_coords = true
+texture = ExtResource("1_cns8g")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+orbit_velocity_min = -2.0
+orbit_velocity_max = 2.0
+angle_max = 720.0
+scale_amount_min = 0.15
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_fitxw")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_clq1t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_14hp8")
+
+[node name="RunAwayArea" parent="." instance=ExtResource("2_bbnvg")]
+visible = false
+scale = Vector2(0.3, 0.3)
+collision_layer = 4
+collision_mask = 4
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 7.0
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_14hp8")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

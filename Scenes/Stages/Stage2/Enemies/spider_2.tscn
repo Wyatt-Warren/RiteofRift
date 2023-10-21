@@ -1,0 +1,181 @@
+[gd_scene load_steps=19 format=3 uid="uid://cj0sskjqt6cu4"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Enemies/spider_2.gd" id="1_1by5n"]
+[ext_resource type="Texture2D" uid="uid://prv6e0ty7se8" path="res://Assets/Stages/02/Enemies/spider2_0003.png" id="2_inv6r"]
+[ext_resource type="PackedScene" uid="uid://cncnan73k2qmi" path="res://Scenes/Stages/Stage2/bullet_2.tscn" id="2_rna2u"]
+[ext_resource type="PackedScene" uid="uid://1cb1o8bi4ahp" path="res://Scenes/Stages/Stage2/web_2.tscn" id="3_gxhxm"]
+[ext_resource type="Texture2D" uid="uid://d3n3w3hraofba" path="res://Assets/Stages/02/Enemies/spider2_0001.png" id="3_nyyxm"]
+[ext_resource type="Texture2D" uid="uid://utbn62ye5s23" path="res://Assets/Stages/02/Enemies/spider2_0002.png" id="4_qarw2"]
+[ext_resource type="Texture2D" uid="uid://cxoto0upedvo" path="res://Assets/Stages/02/Enemies/spider2_0004.png" id="5_ymko3"]
+[ext_resource type="Texture2D" uid="uid://bvc7bt5q8i0jm" path="res://Assets/Stages/02/Enemies/spider2_0005.png" id="6_yo1a6"]
+[ext_resource type="Texture2D" uid="uid://sslixy1j8syj" path="res://Assets/Stages/02/Enemies/spider2_0006.png" id="7_w321m"]
+[ext_resource type="Texture2D" uid="uid://b3wgg1lwlwrgj" path="res://Assets/Stages/02/Enemies/spider2_0007.png" id="8_dewjq"]
+[ext_resource type="Texture2D" uid="uid://dv1glv6e3ap8i" path="res://Assets/Stages/02/Enemies/spider2_0008.png" id="9_56rd5"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="12_3c7rg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2fkh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nyyxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qarw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_inv6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ymko3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yo1a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w321m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dewjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_56rd5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxmcj"]
+radius = 41.0
+
+[sub_resource type="Animation" id="Animation_nndpq"]
+resource_name = "Walking"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(7, -21), Vector2(7, -14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.26, 0.26), Vector2(0.26, 0.22)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(7, -21), Vector2(7, -14)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.26, 0.26), Vector2(0.26, 0.22)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kbgsy"]
+_data = {
+"Walking": SubResource("Animation_nndpq")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig57p"]
+radius = 107.692
+height = 415.385
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngige"]
+radius = 103.846
+height = 269.231
+
+[node name="Spider2" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 29
+collision_mask = 29
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_1by5n")
+bullet = ExtResource("2_rna2u")
+web = ExtResource("3_gxhxm")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(7, -21)
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("2_inv6r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, -21)
+scale = Vector2(0.26, 0.26)
+sprite_frames = SubResource("SpriteFrames_t2fkh")
+frame_progress = 0.447943
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_qxmcj")
+
+[node name="RunAwayArea" parent="." instance=ExtResource("12_3c7rg")]
+visible = false
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_kbgsy")
+}
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="WebTimer" type="Timer" parent="."]
+wait_time = 16.0
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(7, -21)
+scale = Vector2(0.26, 0.26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-7.69229, 115.385)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ig57p")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-15.3846, -84.6154)
+shape = SubResource("CapsuleShape2D_ngige")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="WebTimer" to="." method="_on_web_timer_timeout"]

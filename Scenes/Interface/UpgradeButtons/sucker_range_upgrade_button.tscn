@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfst72xft67nt"]
+
+[ext_resource type="PackedScene" uid="uid://byb2tu6y0kfy4" path="res://Scenes/Interface/UpgradeButtons/upgrade_button.tscn" id="1_712da"]
+[ext_resource type="Script" path="res://Scenes/Interface/UpgradeButtons/sucker_range_upgrade_button.gd" id="2_fgvdt"]
+
+[node name="SuckerRangeUpgradeButton" instance=ExtResource("1_712da")]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+text = "  Vortex Range"
+script = ExtResource("2_fgvdt")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

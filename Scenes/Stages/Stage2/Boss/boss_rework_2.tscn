@@ -1,0 +1,402 @@
+[gd_scene load_steps=20 format=3 uid="uid://ciflvdjb6jb0n"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_rework_2.gd" id="1_8fh7o"]
+[ext_resource type="Texture2D" uid="uid://buu1yf8spda7i" path="res://Assets/Stages/02/Boss/BossWallMushroom.png" id="1_s2x2e"]
+[ext_resource type="PackedScene" uid="uid://f1uq0iahestb" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_1.tscn" id="2_1iofq"]
+[ext_resource type="Texture2D" uid="uid://c0q71hxlaopuf" path="res://Assets/Stages/02/Boss/BossTallMushroom.png" id="2_gfldv"]
+[ext_resource type="PackedScene" uid="uid://plyh717sbri0" path="res://Scenes/Stages/Stage2/Boss/boss_2_bullet.tscn" id="2_gmbru"]
+[ext_resource type="PackedScene" uid="uid://bn3amoiqv5u2l" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_2.tscn" id="3_5gv7r"]
+[ext_resource type="Texture2D" uid="uid://co83vhjg30d4b" path="res://Assets/Stages/02/Boss/BossSmallMushroom.png" id="3_i2fwl"]
+[ext_resource type="PackedScene" uid="uid://bdy6i0uk1slo8" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_3.tscn" id="4_it5kb"]
+[ext_resource type="Texture2D" uid="uid://bubgso3ulnwox" path="res://Assets/Stages/02/Boss/MushroomAnimSheet.png" id="9_1eskg"]
+[ext_resource type="Texture2D" uid="uid://buspdbny42vvr" path="res://Assets/Stages/02/SporeCloud.png" id="9_2xo80"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m42cq"]
+radius = 132.136
+
+[sub_resource type="Gradient" id="Gradient_rh7hr"]
+offsets = PackedFloat32Array(0, 0.147465, 0.497696, 0.852535, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.497474, 0.497474, 0.497474, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_hqufb"]
+resource_name = "BounceBoss"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mushroom1Holder/Mushroom1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(106, -48), Vector2(106, -39)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mushroom1Holder/Mushroom1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.26)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mushroom2Holder/Mushroom2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1.7),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-72, -79), Vector2(-72, -70)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mushroom2Holder/Mushroom2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 1.7),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.26)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Mushroom3Holder/Mushroom3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 1.2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(16, -90), Vector2(16, -73)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Mushroom3Holder/Mushroom3:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 1.2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.26)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Mushroom4Holder/Mushroom4:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(92, 39), Vector2(92, 46)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Mushroom4Holder/Mushroom4:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.17)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Mushroom5Holder/Mushroom5:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.9, 1.9),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-93, 36), Vector2(-93, 43)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Mushroom5Holder/Mushroom5:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.9, 1.9),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.17)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Mushroom6Holder/Mushroom6:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.3, 1.3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-1, 72), Vector2(-1, 79)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Mushroom6Holder/Mushroom6:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.3, 1.3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1s0cj"]
+_data = {
+"BounceBoss": SubResource("Animation_hqufb")
+}
+
+[sub_resource type="Animation" id="Animation_jljra"]
+resource_name = "ShakeBoss"
+length = 0.2
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mushroom1Holder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 0), Vector2(-8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mushroom2Holder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.04, 0.09, 0.19),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 0), Vector2(8, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mushroom3Holder:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 0), Vector2(-8, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mushroom4Holder:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.02, 0.07, 0.17),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 0), Vector2(8, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Mushroom5Holder:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.04, 0.09, 0.19),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 0), Vector2(-8, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Mushroom6Holder:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.01, 0.06, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 0), Vector2(8, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yw8em"]
+_data = {
+"ShakeBoss": SubResource("Animation_jljra")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wlfuh"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ihksf"]
+offsets = PackedFloat32Array(0, 0.525346, 0.760369, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yj2rm"]
+radius = 175.026
+
+[node name="BossRework2" type="StaticBody2D" groups=["Boss"]]
+collision_layer = 33
+collision_mask = 33
+script = ExtResource("1_8fh7o")
+bullet = ExtResource("2_gmbru")
+fragment1 = ExtResource("2_1iofq")
+fragment2 = ExtResource("3_5gv7r")
+fragment3 = ExtResource("4_it5kb")
+
+[node name="Mushroom1Holder" type="Node2D" parent="."]
+
+[node name="Mushroom1" type="Sprite2D" parent="Mushroom1Holder"]
+position = Vector2(106, -48)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_s2x2e")
+
+[node name="Mushroom2Holder" type="Node2D" parent="."]
+position = Vector2(6.4, 0)
+
+[node name="Mushroom2" type="Sprite2D" parent="Mushroom2Holder"]
+position = Vector2(-72, -71.62)
+scale = Vector2(0.3, 0.2672)
+texture = ExtResource("1_s2x2e")
+flip_h = true
+
+[node name="Mushroom3Holder" type="Node2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="Mushroom3" type="Sprite2D" parent="Mushroom3Holder"]
+position = Vector2(16, -88.64)
+scale = Vector2(0.3, 0.2968)
+texture = ExtResource("2_gfldv")
+
+[node name="Mushroom4Holder" type="Node2D" parent="."]
+position = Vector2(3.2, 0)
+
+[node name="Mushroom4" type="Sprite2D" parent="Mushroom4Holder"]
+position = Vector2(92, 42.5)
+scale = Vector2(0.2, 0.185)
+texture = ExtResource("3_i2fwl")
+
+[node name="Mushroom5Holder" type="Node2D" parent="."]
+position = Vector2(-6.4, 0)
+
+[node name="Mushroom5" type="Sprite2D" parent="Mushroom5Holder"]
+position = Vector2(-93, 42.86)
+scale = Vector2(0.2, 0.1706)
+texture = ExtResource("3_i2fwl")
+flip_h = true
+
+[node name="Mushroom6Holder" type="Node2D" parent="."]
+position = Vector2(1.6, 0)
+
+[node name="Mushroom6" type="Sprite2D" parent="Mushroom6Holder"]
+position = Vector2(-1, 73.26)
+scale = Vector2(0.2, 0.1946)
+texture = ExtResource("3_i2fwl")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_m42cq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(3, -41)
+amount = 32
+local_coords = true
+texture = ExtResource("9_2xo80")
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+angle_max = 360.0
+scale_amount_min = 0.4
+scale_amount_max = 1.2
+color_ramp = SubResource("Gradient_rh7hr")
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+autoplay = "BounceBoss"
+libraries = {
+"": SubResource("AnimationLibrary_1s0cj")
+}
+
+[node name="Shaker" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yw8em")
+}
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShatteredParticles" type="CPUParticles2D" parent="."]
+z_index = 1
+material = SubResource("CanvasItemMaterial_wlfuh")
+position = Vector2(0, -29)
+emitting = false
+amount = 75
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+texture = ExtResource("9_1eskg")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 650.0
+angle_max = 360.0
+scale_amount_min = 0.15
+scale_amount_max = 0.25
+color_ramp = SubResource("Gradient_ihksf")
+anim_offset_max = 1.0
+
+[node name="Hitbox" type="Area2D" parent="." groups=["BossHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(12, -50)
+shape = SubResource("CircleShape2D_yj2rm")
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

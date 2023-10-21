@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmjj6sgkvsrb6"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Grenade.gd" id="1_vnion"]
+[ext_resource type="PackedScene" uid="uid://cqhl14wc25qsu" path="res://Scenes/Player/GrenadeHole.tscn" id="2_c4o0m"]
+[ext_resource type="Texture2D" uid="uid://3gsp0l6xafe0" path="res://Assets/Player/grenade.png" id="3_qtrlq"]
+[ext_resource type="Texture2D" uid="uid://dr7gg4mts7q33" path="res://Assets/Player/Sucker/Particles/particle01.png" id="4_8lyix"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vwjj0"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_c5re7"]
+offsets = PackedFloat32Array(0, 0.160839, 0.629371, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r51pw"]
+radius = 18.0278
+
+[sub_resource type="Animation" id="Animation_xr0bi"]
+resource_name = "GrenadeSpin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.53786]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fxjoo"]
+_data = {
+"GrenadeSpin": SubResource("Animation_xr0bi")
+}
+
+[sub_resource type="Animation" id="Animation_vsgxu"]
+resource_name = "GrenadeFade"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7e38"]
+_data = {
+"GrenadeFade": SubResource("Animation_vsgxu")
+}
+
+[node name="Grenade" type="Area2D" groups=["Grenade"]]
+collision_layer = 65
+collision_mask = 65
+script = ExtResource("1_vnion")
+grenadeHole = ExtResource("2_c4o0m")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_vwjj0")
+amount = 12
+lifetime = 0.75
+local_coords = true
+texture = ExtResource("4_8lyix")
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 35.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.03
+scale_amount_max = 0.05
+color_ramp = SubResource("Gradient_c5re7")
+anim_offset_max = 0.25
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+rotation = 3.79296
+scale = Vector2(0.144, 0.144)
+texture = ExtResource("3_qtrlq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r51pw")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="CollidableTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[node name="SpinAnimator" type="AnimationPlayer" parent="."]
+autoplay = "GrenadeSpin"
+libraries = {
+"": SubResource("AnimationLibrary_fxjoo")
+}
+
+[node name="FadeAwayAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p7e38")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="timeout" from="CollidableTimer" to="." method="_on_collidable_timer_timeout"]
+[connection signal="animation_finished" from="FadeAwayAnimator" to="." method="_on_fade_away_animator_animation_finished"]

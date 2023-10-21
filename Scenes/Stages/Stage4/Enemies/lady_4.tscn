@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://pjex02xmu0qn"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage4/Enemies/lady_4.gd" id="1_fq7r1"]
+[ext_resource type="Texture2D" uid="uid://ssck12qgwghn" path="res://Assets/Stages/04/Enemies/Lady4.png" id="1_sb5jy"]
+[ext_resource type="PackedScene" uid="uid://nlm0tgth7n62" path="res://Scenes/Stages/Stage4/eyeballs_4.tscn" id="3_0vxw4"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="4_peu6j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkp4v"]
+radius = 44.0
+
+[sub_resource type="Animation" id="Animation_p5es6"]
+resource_name = "Walking"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -30), Vector2(0, -25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.28, 0.3), Vector2(0.32, 0.28)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -30), Vector2(0, -25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.28, 0.3), Vector2(0.32, 0.28)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7d7b"]
+_data = {
+"Walking": SubResource("Animation_p5es6")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m1osx"]
+radius = 96.4286
+height = 500.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwv62"]
+radius = 19.0816
+height = 342.381
+
+[node name="Lady4" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 29
+collision_mask = 29
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_fq7r1")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+scale = Vector2(0.28, 0.3)
+texture = ExtResource("1_sb5jy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_kkp4v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_w7d7b")
+}
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="EyeballTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="Eyeballs4" parent="." instance=ExtResource("3_0vxw4")]
+position = Vector2(0, -135)
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RunAwayArea" parent="." instance=ExtResource("4_peu6j")]
+visible = false
+scale = Vector2(0.3, 0.3)
+collision_layer = 4
+collision_mask = 4
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(0, -30)
+scale = Vector2(0.28, 0.3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_m1osx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(3.34814, 219.934)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lwv62")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="EyeballTimer" to="." method="_on_eyeball_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

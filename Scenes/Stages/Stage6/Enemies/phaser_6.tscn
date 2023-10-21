@@ -1,0 +1,215 @@
+[gd_scene load_steps=17 format=3 uid="uid://dgl6whuxdn8br"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage6/Enemies/phaser_6.gd" id="1_3cl5u"]
+[ext_resource type="Texture2D" uid="uid://cua0log3hha0k" path="res://Assets/Misc/Shadow.png" id="1_g0prp"]
+[ext_resource type="Texture2D" uid="uid://bybgel6v6vhhf" path="res://Assets/Stages/06/Enemies/Phaser6Full.png" id="1_x4neg"]
+[ext_resource type="PackedScene" uid="uid://bptjq8awlcu4c" path="res://Scenes/Stages/Stage6/bullet_6.tscn" id="2_mcks4"]
+[ext_resource type="Texture2D" uid="uid://bfilw2hnvfts1" path="res://Assets/Stages/06/Enemies/Phaser6RightWing.png" id="2_yh3lq"]
+[ext_resource type="Texture2D" uid="uid://bojt8d2yiil58" path="res://Assets/Stages/06/Enemies/Phaser6LeftWing.png" id="3_dvm7k"]
+[ext_resource type="Texture2D" uid="uid://btjb1440smpti" path="res://Assets/Stages/06/Enemies/Phaser6.png" id="4_ajp0v"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="6_0xcew"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="9_hrdf1"]
+[ext_resource type="Texture2D" uid="uid://ckhc8wvpk8kqe" path="res://Assets/Stages/05/Star5.png" id="10_ijb0w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o6vfd"]
+radius = 39.2046
+
+[sub_resource type="Animation" id="Animation_f3rxy"]
+resource_name = "Bounce"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/RightWing:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.174533, 0.174533]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/LeftWing:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.174533, -0.174533]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tw5sy"]
+_data = {
+"Bounce": SubResource("Animation_f3rxy")
+}
+
+[sub_resource type="Gradient" id="Gradient_t72hw"]
+offsets = PackedFloat32Array(0, 0.126638, 0.262009, 0.388646, 0.606987)
+colors = PackedColorArray(1, 1, 1, 0, 0.890238, 0.999983, 1, 1, 0.617713, 0.99927, 1, 1, 0.635828, 0.829224, 1, 1, 0, 0.402914, 0.731311, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l404l"]
+size = Vector2(75, 74)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_icykk"]
+radius = 29.0172
+
+[node name="Phaser6" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 21
+collision_mask = 21
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_3cl5u")
+bullet = ExtResource("2_mcks4")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, 47)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("1_g0prp")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -19)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_x4neg")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="RightWing" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -19)
+rotation = -0.174533
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_yh3lq")
+
+[node name="LeftWing" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -19)
+rotation = 0.174533
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_dvm7k")
+
+[node name="Body" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -19)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_ajp0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_o6vfd")
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+autoplay = "Bounce"
+libraries = {
+"": SubResource("AnimationLibrary_tw5sy")
+}
+
+[node name="RunAwayArea" parent="." instance=ExtResource("6_0xcew")]
+visible = false
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 4
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="ShootTimer2" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="PhaseTimer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="PhaseTimer2" type="Timer" parent="."]
+wait_time = 1.1
+one_shot = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -19)
+emitting = false
+amount = 75
+one_shot = true
+explosiveness = 0.7
+texture = ExtResource("9_hrdf1")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+radial_accel_min = -1000.0
+radial_accel_max = -1000.0
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_t72hw")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(0, -19)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.7
+texture = ExtResource("10_ijb0w")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+angular_velocity_min = -400.0
+angular_velocity_max = 400.0
+radial_accel_min = -1000.0
+radial_accel_max = -1000.0
+angle_max = 360.0
+scale_amount_min = 0.04
+scale_amount_max = 0.08
+color_ramp = SubResource("Gradient_t72hw")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1.5, -1)
+shape = SubResource("RectangleShape2D_l404l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2, -57)
+shape = SubResource("CircleShape2D_icykk")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ShootTimer2" to="." method="_on_shoot_timer_2_timeout"]
+[connection signal="timeout" from="PhaseTimer" to="." method="_on_phase_timer_timeout"]
+[connection signal="timeout" from="PhaseTimer2" to="." method="_on_phase_timer_2_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

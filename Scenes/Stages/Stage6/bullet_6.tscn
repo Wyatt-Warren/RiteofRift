@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://bptjq8awlcu4c"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage6/bullet_6.gd" id="1_xl321"]
+[ext_resource type="Texture2D" uid="uid://dn02lrqxhlneh" path="res://Assets/Stages/06/Bullet6.png" id="2_6bynu"]
+
+[sub_resource type="Animation" id="Animation_jbtjy"]
+resource_name = "Disappear"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet6:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5kj7"]
+_data = {
+"Disappear": SubResource("Animation_jbtjy")
+}
+
+[sub_resource type="Animation" id="Animation_clm64"]
+resource_name = "GrowBullet"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet6:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x626s"]
+_data = {
+"GrowBullet": SubResource("Animation_clm64")
+}
+
+[node name="Bullet6" type="Area2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_xl321")
+
+[node name="Bullet6" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6bynu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(14, 0, 0, -4, -14, 0, 0, 4)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h5kj7")
+}
+
+[node name="Grower" type="AnimationPlayer" parent="."]
+autoplay = "GrowBullet"
+libraries = {
+"": SubResource("AnimationLibrary_x626s")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

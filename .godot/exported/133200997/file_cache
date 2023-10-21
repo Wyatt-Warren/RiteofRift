@@ -1,0 +1,13 @@
+res://Scenes/Player/Camera.tscn::0c4fa53714636a47c4828612bf041617::1682702824::res://.godot/exported/133200997/export-330c480b7abded506dbf29f9fd413bcb-Camera.scn
+res://Scenes/Player/Grenade.tscn::2bd33c22a26208163413bad1c38bfb2a::1682702824::res://.godot/exported/133200997/export-67e4f87d19c553d81b5eb3d5c7ca7a82-Grenade.scn
+res://Scenes/Player/GrenadeHole.tscn::4cc24514cc7a8cbd397ca7482257a457::1682702825::res://.godot/exported/133200997/export-14cd6d883b4b15518b32592db639a270-GrenadeHole.scn
+res://Scenes/Player/Player.tscn::dbf959ef0199eb84fad5457b02dccab7::1682702824::res://.godot/exported/133200997/export-81ac81193aa819dc19769e88ef012874-Player.scn
+res://Scenes/Player/PlayerBody.tscn::6c4f4c2a5e8a3e0b21ae39b4dd0991db::1682702824::res://.godot/exported/133200997/export-157ee78517b03d359dc228e2e879b8fe-PlayerBody.scn
+res://Scenes/Player/player_hitbox.tscn::27d54364714fb9276b68f037814abf64::1682702824::res://.godot/exported/133200997/export-5667336969d5989cb796c94972774e5c-player_hitbox.scn
+res://Scenes/Player/Sucker.tscn::a87aca4a9656b0d047adbcdfa1acac79::1682702825::res://.godot/exported/133200997/export-f451a83ccbdc0ab07692166efac5484a-Sucker.scn
+res://Scenes/Arena.tscn::7d2d0f090e1929a9fd2c0ed3830e49e5::1682702824::res://.godot/exported/133200997/export-f0828704ca53ec5b6b8b52ef23890a69-Arena.scn
+res://Scenes/EnemySpawnTimer.tscn::b89240e6f04936ed3abe9ff597ead796::1681606630::res://.godot/exported/133200997/export-58830ce1ca79536fb154cdcf338edd70-EnemySpawnTimer.scn
+res://Scenes/run_away_area.tscn::a0ab48652a15f501045e9d1ed97cf143::1682702825::res://.godot/exported/133200997/export-27de25937ecd5433575dcf5850860584-run_away_area.scn
+res://Scenes/TestEnemy.tscn::1af14db010e4a6d813e8b332f383954f::1682702824::res://.godot/exported/133200997/export-1a01c87da375a84376a76edae1aa96e7-TestEnemy.scn
+res://Scenes/test_bullet.tscn::4f58aa6b41999a8073ffe8dd61d15225::1682702824::res://.godot/exported/133200997/export-d05e3b277cacb3650fd6c2ffccaa78ab-test_bullet.scn
+res://default_env.tres::4bf944275702348e7e943d643eae1af7::1682702825::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res

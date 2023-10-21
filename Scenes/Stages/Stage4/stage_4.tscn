@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpwkupae82nl7"]
+
+[ext_resource type="PackedScene" uid="uid://c17wpcxkbfrdu" path="res://Scenes/Stages/Arena.tscn" id="1_ci83n"]
+[ext_resource type="Texture2D" uid="uid://bajkfkc5yl6m8" path="res://Assets/Stages/04/Background.png" id="2_6n655"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage4/stage_4.gd" id="2_ee540"]
+[ext_resource type="PackedScene" uid="uid://cu680c056epfe" path="res://Scenes/Stages/Stage4/Enemies/mitosis_4.tscn" id="3_31qey"]
+[ext_resource type="PackedScene" uid="uid://dec4floc0epu2" path="res://Scenes/Stages/Stage4/Enemies/enemy_4.tscn" id="3_aubf3"]
+[ext_resource type="PackedScene" uid="uid://pjex02xmu0qn" path="res://Scenes/Stages/Stage4/Enemies/lady_4.tscn" id="5_oxkch"]
+[ext_resource type="PackedScene" uid="uid://4by72wvr6oc0" path="res://Scenes/Stages/Stage4/Enemies/booster_4.tscn" id="6_ywtap"]
+[ext_resource type="PackedScene" uid="uid://bhhk3mdcynkp8" path="res://Scenes/Stages/Stage4/swarm_4.tscn" id="7_e8k2k"]
+[ext_resource type="PackedScene" uid="uid://b2dwhk54rb6ld" path="res://Scenes/Player/boss_arrow.tscn" id="9_pa3gu"]
+[ext_resource type="PackedScene" uid="uid://cawaitomgd6jf" path="res://Scenes/Stages/Stage4/Boss/boss_4.tscn" id="9_tx71s"]
+
+[node name="Stage4" instance=ExtResource("1_ci83n")]
+script = ExtResource("2_ee540")
+enemy4 = ExtResource("3_aubf3")
+mitosis4 = ExtResource("3_31qey")
+lady4 = ExtResource("5_oxkch")
+booster4 = ExtResource("6_ywtap")
+swarm4 = ExtResource("7_e8k2k")
+boss4 = ExtResource("9_tx71s")
+bossArrow = ExtResource("9_pa3gu")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+position = Vector2(10, 10)
+motion_mirroring = Vector2(2000, 1500)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6n655")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+motion_mirroring = Vector2(2000, 1500)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="0"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6n655")
+centered = false
+
+[node name="EnemySpawnTimer" parent="World" index="2"]
+wait_time = 0.5
+
+[node name="EnemySpawnTimer2" type="Timer" parent="World" index="3"]
+wait_time = 2.0
+
+[node name="EnemySpawnTimer3" type="Timer" parent="World" index="4"]
+wait_time = 2.0
+
+[node name="BoostSpawnTimer" type="Timer" parent="World" index="6"]
+
+[node name="BoostEnableTimer" type="Timer" parent="World" index="7"]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="SwarmSpawnTimer" type="Timer" parent="World" index="8"]
+
+[node name="Swarms" type="Node2D" parent="World" index="11"]
+
+[connection signal="timeout" from="World/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer2" to="." method="_on_enemy_spawn_timer_2_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer3" to="." method="_on_enemy_spawn_timer_3_timeout"]
+[connection signal="timeout" from="World/WaveChangeTimer" to="." method="_on_wave_change_timer_timeout"]
+[connection signal="timeout" from="World/BoostSpawnTimer" to="." method="_on_boost_spawn_timer_timeout"]
+[connection signal="timeout" from="World/BoostEnableTimer" to="." method="_on_boost_enable_timer_timeout"]
+[connection signal="timeout" from="World/SwarmSpawnTimer" to="." method="_on_swarm_spawn_timer_timeout"]

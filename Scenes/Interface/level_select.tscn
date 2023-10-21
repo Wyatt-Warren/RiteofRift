@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4gomnsaf3ojr"]
+
+[ext_resource type="Script" path="res://Scenes/Interface/Stage1Button.gd" id="1_msd1l"]
+[ext_resource type="Script" path="res://Scenes/Interface/Stage2Button.gd" id="2_6i6ln"]
+[ext_resource type="Script" path="res://Scenes/Interface/Stage3Button.gd" id="3_u5xmr"]
+[ext_resource type="Script" path="res://Scenes/Interface/Stage4Button.gd" id="4_7jnmb"]
+[ext_resource type="Script" path="res://Scenes/Interface/Stage5Button.gd" id="5_0vgjx"]
+[ext_resource type="Script" path="res://Scenes/Interface/Stage6Button.gd" id="6_rimdq"]
+[ext_resource type="Script" path="res://Scenes/Interface/Stage7Button.gd" id="7_yaclp"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -777.5
+offset_top = -41.5
+offset_right = 777.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stage1Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 1"
+script = ExtResource("1_msd1l")
+
+[node name="Stage2Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 2"
+script = ExtResource("2_6i6ln")
+
+[node name="Stage3Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 3"
+script = ExtResource("3_u5xmr")
+
+[node name="Stage4Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 4"
+script = ExtResource("4_7jnmb")
+
+[node name="Stage5Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 5"
+script = ExtResource("5_0vgjx")
+
+[node name="Stage6Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 6"
+script = ExtResource("6_rimdq")
+
+[node name="Stage7Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Stage 7"
+script = ExtResource("7_yaclp")
+
+[connection signal="pressed" from="HBoxContainer/Stage1Button" to="HBoxContainer/Stage1Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Stage2Button" to="HBoxContainer/Stage2Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Stage3Button" to="HBoxContainer/Stage3Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Stage4Button" to="HBoxContainer/Stage4Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Stage5Button" to="HBoxContainer/Stage5Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Stage6Button" to="HBoxContainer/Stage6Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Stage7Button" to="HBoxContainer/Stage7Button" method="_on_pressed"]

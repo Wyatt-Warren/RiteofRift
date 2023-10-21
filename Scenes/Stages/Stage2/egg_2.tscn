@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0t0adqbqm15m"]
+
+[ext_resource type="Texture2D" uid="uid://cdffnprfgfjf8" path="res://Assets/Stages/02/Egg2.png" id="1_kfwb7"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/egg_2.gd" id="1_oc23c"]
+[ext_resource type="PackedScene" uid="uid://bhgctxrygn2rc" path="res://Scenes/Stages/Stage2/Enemies/baby_2.tscn" id="2_kd7q7"]
+[ext_resource type="Texture2D" uid="uid://tpomupapkkbh" path="res://Assets/Stages/02/Egg2Particle.png" id="3_8dtnm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhopy"]
+radius = 22.0227
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bqsfq"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_0kdne"]
+offsets = PackedFloat32Array(0.654378, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_2ybxd"]
+resource_name = "Shaking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 1, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 0.5, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(2, -6), Vector2(-3, -10), Vector2(2, -6), Vector2(2, -6), Vector2(7, -10), Vector2(2, -6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 1, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 0.5, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.19, 0.25), Vector2(0.2, 0.2), Vector2(0.2, 0.2), Vector2(0.19, 0.25), Vector2(0.2, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 1, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 0.5, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(2, -6), Vector2(-3, -10), Vector2(2, -6), Vector2(2, -6), Vector2(7, -10), Vector2(2, -6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 1, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 0.5, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.19, 0.25), Vector2(0.2, 0.2), Vector2(0.2, 0.2), Vector2(0.19, 0.25), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5xo2"]
+_data = {
+"Shaking": SubResource("Animation_2ybxd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61u55"]
+size = Vector2(225, 190)
+
+[node name="Egg2" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 64
+collision_mask = 64
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_oc23c")
+baby = ExtResource("2_kd7q7")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(2, -6)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_kfwb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_qhopy")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bqsfq")
+position = Vector2(2, -6)
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("3_8dtnm")
+emission_shape = 1
+emission_sphere_radius = 15.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_0kdne")
+anim_offset_max = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Shaking"
+libraries = {
+"": SubResource("AnimationLibrary_r5xo2")
+}
+
+[node name="HatchTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="ParticleTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(2, -6)
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-7.5, 10)
+shape = SubResource("RectangleShape2D_61u55")
+
+[connection signal="timeout" from="HatchTimer" to="." method="_on_hatch_timer_timeout"]
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

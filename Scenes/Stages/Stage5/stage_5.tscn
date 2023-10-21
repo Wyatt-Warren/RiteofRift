@@ -1,0 +1,628 @@
+[gd_scene load_steps=17 format=3 uid="uid://e1on5vbvxdv"]
+
+[ext_resource type="PackedScene" uid="uid://c17wpcxkbfrdu" path="res://Scenes/Stages/Arena.tscn" id="1_q2q01"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/stage_5.gd" id="2_8vlox"]
+[ext_resource type="Texture2D" uid="uid://ckhc8wvpk8kqe" path="res://Assets/Stages/05/Star5.png" id="2_xgiev"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="3_7mapf"]
+[ext_resource type="PackedScene" uid="uid://ckh82xtj7q8kb" path="res://Scenes/Stages/Stage5/Enemies/enemy_5.tscn" id="3_q7kxy"]
+[ext_resource type="PackedScene" uid="uid://cwpire6xjlnbs" path="res://Scenes/Stages/Stage5/Enemies/planet_5.tscn" id="4_1hb3m"]
+[ext_resource type="PackedScene" uid="uid://c5hdm3euia1mh" path="res://Scenes/Stages/Stage5/Enemies/sun_5.tscn" id="5_amuyd"]
+[ext_resource type="PackedScene" uid="uid://dk45gvxs65p3y" path="res://Scenes/Stages/Stage5/Comet5.tscn" id="6_eoyuh"]
+[ext_resource type="PackedScene" uid="uid://dn7bxv857exgx" path="res://Scenes/Stages/Stage5/Enemies/booster_5.tscn" id="6_f0jv5"]
+[ext_resource type="PackedScene" uid="uid://b2dwhk54rb6ld" path="res://Scenes/Player/boss_arrow.tscn" id="8_8hg66"]
+[ext_resource type="PackedScene" uid="uid://dfq5tfuscjx37" path="res://Scenes/Stages/Stage5/Boss/boss_5.tscn" id="9_kqt57"]
+
+[sub_resource type="Gradient" id="Gradient_m5pvd"]
+offsets = PackedFloat32Array(0, 0.207373, 0.801843, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m3643"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_r3kd6"]
+offsets = PackedFloat32Array(0, 0.239631, 0.599078, 0.769585, 0.986175)
+colors = PackedColorArray(1, 0.873735, 0.920268, 0, 0.900799, 0.601228, 1, 1, 0.880407, 0.00121732, 0.961174, 1, 0.939569, 0.000152093, 0.778212, 1, 1, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_nc6n8"]
+offsets = PackedFloat32Array(0, 0.281106, 0.599078, 0.769585, 0.986175)
+colors = PackedColorArray(1, 0.867766, 0.957835, 0, 0.676044, 0.712446, 1, 1, 0.561927, 0.449064, 1, 1, 0.369805, 0.46068, 1, 1, 0, 0.526464, 0.997936, 0)
+
+[sub_resource type="Gradient" id="Gradient_ji0op"]
+offsets = PackedFloat32Array(0, 0.281106, 0.599078, 0.769585, 0.986175)
+colors = PackedColorArray(0.701833, 1, 0.72797, 0, 0.664538, 1, 0.759664, 1, 0, 0.793707, 0.632504, 1, 3.03224e-06, 0.746361, 0.203494, 1, 0, 1, 0, 0)
+
+[node name="Stage5" instance=ExtResource("1_q2q01")]
+script = ExtResource("2_8vlox")
+enemy5 = ExtResource("3_q7kxy")
+planet5 = ExtResource("4_1hb3m")
+sun5 = ExtResource("5_amuyd")
+booster5 = ExtResource("6_f0jv5")
+comet5 = ExtResource("6_eoyuh")
+boss5 = ExtResource("9_kqt57")
+bossArrow = ExtResource("8_8hg66")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+[node name="SpaceLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(4000, 4000)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/SpaceLayer" index="0"]
+offset_right = 4000.0
+offset_bottom = 4000.0
+color = Color(0.0313726, 0, 0.0313726, 1)
+
+[node name="SpaceLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+position = Vector2(10, 10)
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(4000, 4000)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/SpaceLayer2" index="0"]
+offset_right = 4000.0
+offset_bottom = 4000.0
+color = Color(0.0313726, 0, 0.0313726, 1)
+
+[node name="StarsLayer" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(4000, 4000)
+
+[node name="StarParticles" type="CPUParticles2D" parent="ParallaxBackground/StarsLayer" index="0"]
+position = Vector2(2000, 2000)
+amount = 2000
+lifetime = 10.0
+preprocess = 10.0
+local_coords = true
+texture = ExtResource("2_xgiev")
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 2000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 4.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+angle_max = 360.0
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color = Color(0.784314, 0.784314, 0.784314, 1)
+color_ramp = SubResource("Gradient_m5pvd")
+
+[node name="CloudLayer" type="ParallaxLayer" parent="ParallaxBackground" index="3"]
+motion_scale = Vector2(0.15, 0.15)
+motion_mirroring = Vector2(4000, 4000)
+
+[node name="CloudPaticles" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="0"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(371, 325)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles2" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="1"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(1735, 1255)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles3" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="2"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(962, 1824)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles4" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="3"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(1720, 488)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles5" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="4"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(581, 1136)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles6" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="5"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(1945, 1818)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles7" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="6"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(2502, 525)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles8" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="7"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3674, 1379)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles9" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="8"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3093, 2024)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles10" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="9"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3531, 700)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles11" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="10"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(2712, 1336)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles12" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="11"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3740, 2075)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles13" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="12"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(276, 2197)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles14" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="13"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(1536, 3127)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles15" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="14"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(763, 3696)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles16" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="15"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(1521, 2360)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles17" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="16"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(382, 3008)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles18" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="17"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(1678, 3703)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles19" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="18"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(2190, 2421)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles20" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="19"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3554, 3351)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_r3kd6")
+
+[node name="CloudPaticles21" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="20"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(2807, 3754)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles22" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="21"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3539, 2584)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_nc6n8")
+
+[node name="CloudPaticles23" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="22"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(2400, 3232)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_max = 0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="CloudPaticles24" type="CPUParticles2D" parent="ParallaxBackground/CloudLayer" index="23"]
+material = SubResource("CanvasItemMaterial_m3643")
+position = Vector2(3313, 257)
+amount = 75
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+texture = ExtResource("3_7mapf")
+emission_shape = 1
+emission_sphere_radius = 64.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.1
+linear_accel_max = 15.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+color = Color(0.501961, 0.501961, 0.501961, 1)
+color_ramp = SubResource("Gradient_ji0op")
+
+[node name="EnemySpawnTimer" parent="World" index="2"]
+wait_time = 0.5
+
+[node name="EnemySpawnTimer2" type="Timer" parent="World" index="3"]
+wait_time = 2.0
+autostart = true
+
+[node name="EnemySpawnTimer3" type="Timer" parent="World" index="4"]
+wait_time = 2.0
+
+[node name="BoostSpawnTimer" type="Timer" parent="World" index="6"]
+
+[node name="BoostEnableTimer" type="Timer" parent="World" index="7"]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="CometSpawnTimer" type="Timer" parent="World" index="8"]
+wait_time = 2.0
+
+[node name="Comets" type="Node2D" parent="World" index="11"]
+
+[connection signal="timeout" from="World/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer2" to="." method="_on_enemy_spawn_timer_2_timeout"]
+[connection signal="timeout" from="World/EnemySpawnTimer3" to="." method="_on_enemy_spawn_timer_3_timeout"]
+[connection signal="timeout" from="World/WaveChangeTimer" to="." method="_on_wave_change_timer_timeout"]
+[connection signal="timeout" from="World/BoostSpawnTimer" to="." method="_on_boost_spawn_timer_timeout"]
+[connection signal="timeout" from="World/BoostEnableTimer" to="." method="_on_boost_enable_timer_timeout"]
+[connection signal="timeout" from="World/CometSpawnTimer" to="." method="_on_comet_spawn_timer_timeout"]

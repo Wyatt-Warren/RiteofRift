@@ -1,0 +1,196 @@
+[gd_scene load_steps=20 format=3 uid="uid://bpcum1ccxig5f"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage3/Boss/boss_3.gd" id="1_85fcq"]
+[ext_resource type="Texture2D" uid="uid://cpqdckxtcjo72" path="res://Assets/Stages/03/Boss/Boss3.png" id="2_b8h7s"]
+[ext_resource type="PackedScene" uid="uid://bxbphrtjpqp2k" path="res://Scenes/Stages/Stage3/fire_bomb_3.tscn" id="2_f7nhc"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="2_kxxs0"]
+[ext_resource type="PackedScene" uid="uid://bnyvirbhwx5m" path="res://Scenes/Stages/Stage3/ice_bomb_3.tscn" id="3_gl41r"]
+[ext_resource type="PackedScene" uid="uid://d1qq0wscg418a" path="res://Scenes/Stages/Stage3/Boss/boss_3_fragment_1.tscn" id="4_ogv4c"]
+[ext_resource type="Texture2D" uid="uid://ckc6ttb15nrwh" path="res://Assets/Stages/03/Fragment3.png" id="4_rw8hm"]
+[ext_resource type="PackedScene" uid="uid://pf1indebd80m" path="res://Scenes/Stages/Stage3/Boss/boss_3_fragment_2.tscn" id="5_mk8kd"]
+[ext_resource type="PackedScene" uid="uid://v3vqwg6rismg" path="res://Scenes/Stages/Stage3/Boss/boss_3_fragment_3.tscn" id="6_m35hh"]
+
+[sub_resource type="Gradient" id="Gradient_0nu64"]
+offsets = PackedFloat32Array(0, 0.16129, 0.525346, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_worfu"]
+offsets = PackedFloat32Array(0, 0.497696, 1)
+colors = PackedColorArray(1, 0.578368, 0.516824, 1, 0.651673, 0.767033, 1, 1, 0.58261, 1, 0.551537, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51tao"]
+radius = 75.2396
+
+[sub_resource type="Animation" id="Animation_abopl"]
+resource_name = "ColorShiftBoss"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.470588, 0.4, 1), Color(0.560784, 1, 0.529412, 1), Color(0.423529, 0.607843, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShatteredParticles:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.470588, 0.4, 1), Color(0.560784, 1, 0.529412, 1), Color(0.423529, 0.607843, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3phfr"]
+_data = {
+"ColorShiftBoss": SubResource("Animation_abopl")
+}
+
+[sub_resource type="Animation" id="Animation_ajmur"]
+resource_name = "ShakeBoss"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, -8), Vector2(-3, -8), Vector2(9, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-6, 0), Vector2(6, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwmok"]
+_data = {
+"ShakeBoss": SubResource("Animation_ajmur")
+}
+
+[sub_resource type="Gradient" id="Gradient_01eyl"]
+offsets = PackedFloat32Array(0, 0.0691244, 0.691244, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2jht"]
+radius = 84.0
+height = 236.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d2tsx"]
+radius = 40.1995
+
+[node name="Boss3" type="StaticBody2D" groups=["Boss"]]
+collision_layer = 33
+collision_mask = 33
+script = ExtResource("1_85fcq")
+fireBomb = ExtResource("2_f7nhc")
+iceBomb = ExtResource("3_gl41r")
+fragment1 = ExtResource("4_ogv4c")
+fragment2 = ExtResource("5_mk8kd")
+fragment3 = ExtResource("6_m35hh")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 48
+lifetime = 0.4
+texture = ExtResource("2_kxxs0")
+direction = Vector2(0, -1)
+spread = 100.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 400.0
+initial_velocity_max = 500.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 0.2
+scale_amount_max = 0.4
+color_ramp = SubResource("Gradient_0nu64")
+color_initial_ramp = SubResource("Gradient_worfu")
+
+[node name="BossSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.470588, 0.4, 1)
+position = Vector2(3, -8)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_b8h7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_51tao")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "ColorShiftBoss"
+libraries = {
+"": SubResource("AnimationLibrary_3phfr")
+}
+
+[node name="Shaker" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qwmok")
+}
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShatteredParticles" type="CPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 128
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.5
+texture = ExtResource("4_rw8hm")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 650.0
+angular_velocity_min = -400.0
+angular_velocity_max = 400.0
+angle_max = 360.0
+scale_amount_min = 0.15
+scale_amount_max = 0.25
+color = Color(1, 0.470588, 0.4, 1)
+color_ramp = SubResource("Gradient_01eyl")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["BossHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(5, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e2jht")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-60, -73)
+shape = SubResource("CircleShape2D_d2tsx")
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2dwhk54rb6ld"]
+
+[ext_resource type="Script" path="res://Scenes/Player/boss_arrow.gd" id="1_sfl3h"]
+[ext_resource type="Texture2D" uid="uid://kfr7f3mxvw37" path="res://Assets/UI/Gameplay/BossArrow.png" id="2_5pwk0"]
+
+[sub_resource type="Animation" id="Animation_4mg2r"]
+resource_name = "Swaying"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(350, 0), Vector2(200, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4kdmq"]
+_data = {
+"Swaying": SubResource("Animation_4mg2r")
+}
+
+[sub_resource type="Animation" id="Animation_gnwlr"]
+resource_name = "AppearArrow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lo0en"]
+_data = {
+"AppearArrow": SubResource("Animation_gnwlr")
+}
+
+[node name="BossArrow" type="Node2D"]
+script = ExtResource("1_sfl3h")
+
+[node name="Icon" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(207.99, 0)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_5pwk0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Swaying"
+libraries = {
+"": SubResource("AnimationLibrary_4kdmq")
+}
+
+[node name="Starter" type="AnimationPlayer" parent="."]
+autoplay = "AppearArrow"
+libraries = {
+"": SubResource("AnimationLibrary_lo0en")
+}

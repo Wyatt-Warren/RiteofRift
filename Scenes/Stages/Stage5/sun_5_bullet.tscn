@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbhifdtrcneol"]
+
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="1_06vhn"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/sun_5_bullet.gd" id="1_8orf5"]
+[ext_resource type="Texture2D" uid="uid://dw1y0saek0daa" path="res://Assets/Stages/05/Enemies/Sun5.png" id="2_1ru3s"]
+
+[sub_resource type="Gradient" id="Gradient_0bi3j"]
+offsets = PackedFloat32Array(0, 0.737327, 1)
+colors = PackedColorArray(1, 0.510427, 0.44245, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2c537"]
+radius = 20.0998
+
+[sub_resource type="Animation" id="Animation_hvf0a"]
+resource_name = "Disappear"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun5:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fw344"]
+_data = {
+"Disappear": SubResource("Animation_hvf0a")
+}
+
+[sub_resource type="Animation" id="Animation_wkblg"]
+resource_name = "GrowBullet"
+length = 0.254
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun5:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpaby"]
+_data = {
+"GrowBullet": SubResource("Animation_wkblg")
+}
+
+[node name="Sun5Bullet" type="Area2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8orf5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 50
+lifetime = 0.2
+local_coords = true
+texture = ExtResource("1_06vhn")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 75.0
+initial_velocity_max = 150.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+orbit_velocity_min = -2.0
+orbit_velocity_max = 2.0
+angle_max = 720.0
+scale_amount_min = 0.08
+scale_amount_max = 0.15
+color = Color(1, 0.721569, 0.67451, 1)
+color_ramp = SubResource("Gradient_0bi3j")
+
+[node name="Sun5" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_1ru3s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2c537")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fw344")
+}
+
+[node name="Grower" type="AnimationPlayer" parent="."]
+autoplay = "GrowBullet"
+libraries = {
+"": SubResource("AnimationLibrary_lpaby")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

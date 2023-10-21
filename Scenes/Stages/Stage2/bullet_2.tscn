@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://cncnan73k2qmi"]
+
+[ext_resource type="Texture2D" uid="uid://d4iesubxuufd7" path="res://Assets/Stages/02/Bullet2.png" id="1_qomtk"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/bullet_2.gd" id="1_sg4vv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oher3"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_ymxvc"]
+resource_name = "Disappear"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.17, 0.17), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7314t"]
+_data = {
+"Disappear": SubResource("Animation_ymxvc")
+}
+
+[sub_resource type="Animation" id="Animation_rvrtf"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qimnk"]
+_data = {
+"Spin": SubResource("Animation_rvrtf")
+}
+
+[sub_resource type="Animation" id="Animation_7kbm8"]
+resource_name = "GrowBullet"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.17, 0.17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3eo1"]
+_data = {
+"GrowBullet": SubResource("Animation_7kbm8")
+}
+
+[node name="Bullet2" type="Area2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_sg4vv")
+
+[node name="Bullet2" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_qomtk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oher3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7314t")
+}
+
+[node name="Rotator" type="AnimationPlayer" parent="."]
+autoplay = "Spin"
+libraries = {
+"": SubResource("AnimationLibrary_qimnk")
+}
+
+[node name="Grower" type="AnimationPlayer" parent="."]
+autoplay = "GrowBullet"
+libraries = {
+"": SubResource("AnimationLibrary_i3eo1")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

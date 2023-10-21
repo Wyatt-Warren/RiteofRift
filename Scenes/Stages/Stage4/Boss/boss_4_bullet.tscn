@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://qygaml1iyu58"]
+
+[ext_resource type="Texture2D" uid="uid://bdvy24x1x5my" path="res://Assets/Stages/04/Eyeball4.png" id="1_70rdg"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage4/Boss/boss_4_bullet.gd" id="1_v346y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ji6mv"]
+radius = 75.0
+
+[sub_resource type="Gradient" id="Gradient_70bah"]
+offsets = PackedFloat32Array(0, 0.184332, 0.83871, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Boss4Bullet" type="Area2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_v346y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ji6mv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-1, 0)
+amount = 50
+lifetime = 0.5
+local_coords = true
+texture = ExtResource("1_70rdg")
+emission_shape = 2
+emission_sphere_radius = 50.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_min = -500.0
+angular_velocity_max = 500.0
+orbit_velocity_min = 0.25
+orbit_velocity_max = 0.75
+radial_accel_min = -50.0
+angle_max = 360.0
+scale_amount_min = 0.08
+scale_amount_max = 0.15
+color_ramp = SubResource("Gradient_70bah")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

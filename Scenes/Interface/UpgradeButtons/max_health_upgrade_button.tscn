@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cie5qugafsido"]
+
+[ext_resource type="PackedScene" uid="uid://byb2tu6y0kfy4" path="res://Scenes/Interface/UpgradeButtons/upgrade_button.tscn" id="1_dpyu4"]
+[ext_resource type="Script" path="res://Scenes/Interface/UpgradeButtons/max_health_upgrade_button.gd" id="2_o8714"]
+
+[node name="MaxHealthUpgradeButton" instance=ExtResource("1_dpyu4")]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+text = "  Max Health"
+script = ExtResource("2_o8714")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

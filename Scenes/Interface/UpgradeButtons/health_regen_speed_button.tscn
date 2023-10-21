@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctc7kn4p7txhj"]
+
+[ext_resource type="PackedScene" uid="uid://byb2tu6y0kfy4" path="res://Scenes/Interface/UpgradeButtons/upgrade_button.tscn" id="1_ywcpr"]
+[ext_resource type="Script" path="res://Scenes/Interface/UpgradeButtons/HealthRegenSpeedButton.gd" id="2_kj5kx"]
+
+[node name="HealthRegenSpeedButton" instance=ExtResource("1_ywcpr")]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+text = "  Health Regeneration Speed"
+script = ExtResource("2_kj5kx")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

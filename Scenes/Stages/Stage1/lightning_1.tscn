@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcbhqwmm602xl"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage1/lightning_1.gd" id="1_3b75w"]
+[ext_resource type="Texture2D" uid="uid://bkyglai0ofo4g" path="res://Assets/Misc/LightningParticle.png" id="2_5gchp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3h1l4"]
+radius = 143.293
+
+[sub_resource type="Animation" id="Animation_xcuec"]
+resource_name = "Lifetime"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lao3c"]
+_data = {
+"Lifetime": SubResource("Animation_xcuec")
+}
+
+[node name="Lightning1" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_3b75w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3h1l4")
+
+[node name="PreTimer" type="Timer" parent="."]
+wait_time = 1.6
+one_shot = true
+autostart = true
+
+[node name="HurtTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 25
+lifetime = 0.05
+texture = ExtResource("2_5gchp")
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+angle_max = 360.0
+scale_amount_min = 0.07
+scale_amount_max = 0.08
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Lifetime"
+libraries = {
+"": SubResource("AnimationLibrary_lao3c")
+}
+
+[connection signal="timeout" from="PreTimer" to="." method="_on_pre_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

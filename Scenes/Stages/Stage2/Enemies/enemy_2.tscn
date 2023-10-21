@@ -1,0 +1,167 @@
+[gd_scene load_steps=17 format=3 uid="uid://bpjn3n7jg5a8c"]
+
+[ext_resource type="Texture2D" uid="uid://kmrjbcwqawye" path="res://Assets/Stages/02/Enemies/enemy2_0001.png" id="1_qdce0"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Enemies/enemy_2.gd" id="1_uvnei"]
+[ext_resource type="Texture2D" uid="uid://2dvhnc7t5xeb" path="res://Assets/Stages/02/Enemies/enemy2_0002.png" id="2_87utg"]
+[ext_resource type="PackedScene" uid="uid://cncnan73k2qmi" path="res://Scenes/Stages/Stage2/bullet_2.tscn" id="2_frnvj"]
+[ext_resource type="Texture2D" uid="uid://q0rpo5egp7b6" path="res://Assets/Stages/02/Enemies/enemy2_0003.png" id="3_6nwic"]
+[ext_resource type="Texture2D" uid="uid://crnf0w41kqplh" path="res://Assets/Stages/02/Enemies/enemy2_0004.png" id="4_wh4j3"]
+[ext_resource type="Texture2D" uid="uid://sam2l2vsjcak" path="res://Assets/Stages/02/Enemies/enemy2_0005.png" id="5_pyfqa"]
+[ext_resource type="Texture2D" uid="uid://cfi7vquxmx60b" path="res://Assets/Stages/02/Enemies/enemy2_0006.png" id="6_q1lrt"]
+[ext_resource type="Texture2D" uid="uid://dn8vl8pyw5jhn" path="res://Assets/Stages/02/Enemies/enemy2_0007.png" id="7_un8me"]
+[ext_resource type="Texture2D" uid="uid://b5leatijh64w5" path="res://Assets/Stages/02/Enemies/enemy2_0008.png" id="8_km4g3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ya2gc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qdce0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_87utg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6nwic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wh4j3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pyfqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q1lrt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_un8me")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_km4g3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_supcm"]
+radius = 30.0167
+
+[sub_resource type="Animation" id="Animation_4dwwf"]
+resource_name = "Walking"
+length = 0.75
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(10, -13), Vector2(10, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(10, -13), Vector2(10, -8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4dqhe"]
+_data = {
+"Walking": SubResource("Animation_4dwwf")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iyk2k"]
+radius = 130.0
+height = 320.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ror3b"]
+radius = 125.1
+
+[node name="Enemy2" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_uvnei")
+bullet = ExtResource("2_frnvj")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(10, -13)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_6nwic")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(10, -13)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_ya2gc")
+autoplay = "default"
+frame_progress = 0.684144
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_supcm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4dqhe")
+}
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(10, -13)
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-60, 65)
+shape = SubResource("CapsuleShape2D_iyk2k")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(65, -75)
+shape = SubResource("CircleShape2D_ror3b")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

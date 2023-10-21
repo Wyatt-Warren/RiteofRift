@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=3 uid="uid://u4git7sw05qg"]
+
+[ext_resource type="Script" path="res://Scenes/Player/PlayerBody.gd" id="1_3tkfj"]
+[ext_resource type="PackedScene" uid="uid://bnxyho18mte3p" path="res://Scenes/falling_guy.tscn" id="2_54nbc"]
+[ext_resource type="Texture2D" uid="uid://cock12487b0b7" path="res://Assets/Player/player0001.png" id="3_6nx3x"]
+[ext_resource type="PackedScene" uid="uid://dmkfq3d6j3g1u" path="res://Scenes/Player/player_hitbox.tscn" id="4_t82wp"]
+[ext_resource type="Texture2D" uid="uid://olloh3yqnxdk" path="res://Assets/Player/player0002.png" id="4_ut1ri"]
+[ext_resource type="Texture2D" uid="uid://4ri3hhuy6kca" path="res://Assets/Player/player0003.png" id="5_1ywcg"]
+[ext_resource type="Texture2D" uid="uid://csfeo3aws18u3" path="res://Assets/Player/player0004.png" id="6_fnjjb"]
+[ext_resource type="Texture2D" uid="uid://dcesyygm5s513" path="res://Assets/Player/player0005.png" id="7_xdr1w"]
+[ext_resource type="Texture2D" uid="uid://byuoyxj1l0tai" path="res://Assets/Player/player0006.png" id="8_3hvbx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0k8ca"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6nx3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ut1ri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1ywcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fnjjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xdr1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3hvbx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 32.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kcs4g"]
+radius = 10.25
+height = 29.0
+
+[node name="PlayerBody" type="Area2D" groups=["player"]]
+collision_layer = 65
+collision_mask = 65
+script = ExtResource("1_3tkfj")
+faller = ExtResource("2_54nbc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_0k8ca")
+autoplay = "default"
+frame_progress = 0.155849
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
+rotation = 1.5708
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_kcs4g")
+
+[node name="Fallers" type="Node2D" parent="."]
+
+[node name="PlayerHitbox" parent="." instance=ExtResource("4_t82wp")]
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(0.05, 0.05)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]

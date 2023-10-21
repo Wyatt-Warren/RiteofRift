@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2qfapgkk2ccx"]
+
+[ext_resource type="PackedScene" uid="uid://byb2tu6y0kfy4" path="res://Scenes/Interface/UpgradeButtons/upgrade_button.tscn" id="1_lpmt0"]
+[ext_resource type="Script" path="res://Scenes/Interface/UpgradeButtons/fire_hole_sucker_count_upgrade_button.gd" id="2_cl2bw"]
+[ext_resource type="Texture2D" uid="uid://c5job2ums4r2u" path="res://Assets/UI/Level Up Screen/LaunchRune.png" id="2_l7sik"]
+
+[node name="FireHoleSuckerCountUpgradeButton" instance=ExtResource("1_lpmt0")]
+text = "  Rift Launch Vortex Count"
+icon = ExtResource("2_l7sik")
+script = ExtResource("2_cl2bw")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

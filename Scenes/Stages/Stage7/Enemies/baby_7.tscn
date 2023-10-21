@@ -1,0 +1,173 @@
+[gd_scene load_steps=19 format=3 uid="uid://b1c85s58acr04"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage7/Enemies/baby_7.gd" id="1_jbtr2"]
+[ext_resource type="Texture2D" uid="uid://dy8it5mf72afc" path="res://Assets/Stages/07/Enemies/baby7_0001.png" id="1_w6dyj"]
+[ext_resource type="PackedScene" uid="uid://c8t86jeql5cgb" path="res://Scenes/Stages/Stage7/bullet_7.tscn" id="2_ap1jc"]
+[ext_resource type="Texture2D" uid="uid://1ler1ko0gwhx" path="res://Assets/Stages/07/Enemies/baby7_0002.png" id="2_pwjbw"]
+[ext_resource type="Texture2D" uid="uid://b3rigv7xaaasb" path="res://Assets/Stages/07/Enemies/baby7_0003.png" id="3_evmwg"]
+[ext_resource type="Texture2D" uid="uid://bu4s23akmt56k" path="res://Assets/Stages/07/Enemies/baby7_0004.png" id="4_q6w0t"]
+[ext_resource type="Texture2D" uid="uid://dsdk0jv1rarfr" path="res://Assets/Stages/07/Enemies/baby7_0005.png" id="5_wn82n"]
+[ext_resource type="Texture2D" uid="uid://rkjnnybhr4vl" path="res://Assets/Stages/07/Enemies/baby7_0006.png" id="6_nvsl1"]
+[ext_resource type="Texture2D" uid="uid://b6ihtrajk7t11" path="res://Assets/Stages/07/Enemies/baby7_0007.png" id="7_7pj4x"]
+[ext_resource type="Texture2D" uid="uid://be4yvin1lnwnc" path="res://Assets/Stages/07/Enemies/baby7_0008.png" id="8_6cmui"]
+[ext_resource type="Texture2D" uid="uid://bplilvm55bjiy" path="res://Assets/Stages/07/Enemies/baby7_0009.png" id="9_kltcu"]
+[ext_resource type="Texture2D" uid="uid://caeiyr8nbb1nu" path="res://Assets/Stages/07/Enemies/baby7_0010.png" id="10_qt2ca"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ff1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w6dyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pwjbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_evmwg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q6w0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wn82n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nvsl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7pj4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6cmui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kltcu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qt2ca")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jj7qf"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_d0wa4"]
+resource_name = "Walking"
+length = 1.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(7, -11), Vector2(7, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(0.18, 0.14)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(7, -11), Vector2(7, -4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(0.18, 0.14)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lhupm"]
+_data = {
+"Walking": SubResource("Animation_d0wa4")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0n6d"]
+radius = 154.613
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpysw"]
+radius = 93.581
+
+[node name="Baby7" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_jbtr2")
+bullet = ExtResource("2_ap1jc")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(7, -11)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("1_w6dyj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, -11)
+scale = Vector2(0.18, 0.18)
+sprite_frames = SubResource("SpriteFrames_1ff1k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_jj7qf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_lhupm")
+}
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(7, -11)
+scale = Vector2(0.18, 0.18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(38.4615, -15.3846)
+shape = SubResource("CircleShape2D_v0n6d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-99.9999, 69.2308)
+shape = SubResource("CircleShape2D_hpysw")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

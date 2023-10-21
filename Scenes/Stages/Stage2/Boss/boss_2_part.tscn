@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://bbx0f3dcfaxcx"]
+
+[ext_resource type="Texture2D" uid="uid://c0q71hxlaopuf" path="res://Assets/Stages/02/Boss/BossTallMushroom.png" id="1_qqm6y"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_2_part.gd" id="1_stay3"]
+[ext_resource type="Texture2D" uid="uid://d1fapq13xicji" path="res://Assets/Stages/02/SporeCloudAlt.png" id="2_gxcnp"]
+[ext_resource type="PackedScene" uid="uid://f1uq0iahestb" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_1.tscn" id="2_vsdun"]
+[ext_resource type="PackedScene" uid="uid://bn3amoiqv5u2l" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_2.tscn" id="3_5an1h"]
+[ext_resource type="PackedScene" uid="uid://bdy6i0uk1slo8" path="res://Scenes/Stages/Stage2/Boss/boss_2_fragment_3.tscn" id="4_erasy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rduma"]
+radius = 74.0
+height = 200.0
+
+[sub_resource type="Gradient" id="Gradient_jq870"]
+offsets = PackedFloat32Array(0, 0.147465, 0.497696, 0.852535, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.497474, 0.497474, 0.497474, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_qcssw"]
+resource_name = "BounceBossPart"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySpriteHolder/EnemySprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.263)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySpriteHolder/EnemySprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-2.38419e-07, -3), Vector2(0, 13)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwl6d"]
+_data = {
+"BounceBossPart": SubResource("Animation_qcssw")
+}
+
+[sub_resource type="Animation" id="Animation_yc7lx"]
+resource_name = "ShakeBossPart"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySpriteHolder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, 0), Vector2(5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugs4n"]
+_data = {
+"ShakeBossPart": SubResource("Animation_yc7lx")
+}
+
+[node name="Boss2Part" type="StaticBody2D" groups=["BossPart"]]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_stay3")
+fragment1 = ExtResource("2_vsdun")
+fragment2 = ExtResource("3_5an1h")
+fragment3 = ExtResource("4_erasy")
+
+[node name="EnemySpriteHolder" type="Node2D" parent="."]
+
+[node name="EnemySprite" type="Sprite2D" parent="EnemySpriteHolder"]
+position = Vector2(-2.38419e-07, -3)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_qqm6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 34)
+shape = SubResource("CapsuleShape2D_rduma")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+local_coords = true
+texture = ExtResource("2_gxcnp")
+emission_shape = 2
+emission_sphere_radius = 100.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+angle_max = 360.0
+scale_amount_min = 0.4
+scale_amount_max = 1.2
+color_ramp = SubResource("Gradient_jq870")
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+autoplay = "BounceBossPart"
+libraries = {
+"": SubResource("AnimationLibrary_bwl6d")
+}
+
+[node name="Shaker" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ugs4n")
+}
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]

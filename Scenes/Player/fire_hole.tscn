@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://pwj3mr3f8kmi"]
+
+[ext_resource type="PackedScene" uid="uid://cqhl14wc25qsu" path="res://Scenes/Player/GrenadeHole.tscn" id="1_0h6rc"]
+[ext_resource type="Script" path="res://Scenes/Player/fire_hole.gd" id="2_2qk4r"]
+
+[node name="FireHole" instance=ExtResource("1_0h6rc")]
+script = ExtResource("2_2qk4r")

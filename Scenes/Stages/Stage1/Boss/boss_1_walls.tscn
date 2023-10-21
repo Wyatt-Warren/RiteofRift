@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://r2qvxvq8i5us"]
+
+[ext_resource type="Texture2D" uid="uid://cgaus8rf8q302" path="res://Assets/Stages/01/Boss/BossWalls.png" id="1_nc6f2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kppqo"]
+size = Vector2(30, 2030)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1ux5"]
+size = Vector2(30, 2030)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okk4u"]
+size = Vector2(2030, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7umkr"]
+size = Vector2(2030, 30)
+
+[node name="Boss1Walls" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["BossWalls"]]
+collision_layer = 34
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1000, 0)
+shape = SubResource("RectangleShape2D_kppqo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1000, 0)
+shape = SubResource("RectangleShape2D_x1ux5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1000)
+shape = SubResource("RectangleShape2D_okk4u")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1000)
+shape = SubResource("RectangleShape2D_7umkr")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(990, 0)
+amount = 1000
+lifetime = 0.5
+texture = ExtResource("1_nc6f2")
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1010)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+angle_max = 360.0
+scale_amount_min = 0.12
+scale_amount_max = 0.24
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(-990, 0)
+amount = 1000
+lifetime = 0.5
+texture = ExtResource("1_nc6f2")
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1010)
+direction = Vector2(-1, 0)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+angle_max = 360.0
+scale_amount_min = 0.12
+scale_amount_max = 0.24
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(0, 990)
+amount = 1000
+lifetime = 0.5
+texture = ExtResource("1_nc6f2")
+emission_shape = 3
+emission_rect_extents = Vector2(1010, 5)
+direction = Vector2(0, 1)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+angle_max = 360.0
+scale_amount_min = 0.12
+scale_amount_max = 0.24
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="."]
+position = Vector2(0, -990)
+amount = 1000
+lifetime = 0.5
+texture = ExtResource("1_nc6f2")
+emission_shape = 3
+emission_rect_extents = Vector2(1010, 5)
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+angle_max = 360.0
+scale_amount_min = 0.12
+scale_amount_max = 0.24

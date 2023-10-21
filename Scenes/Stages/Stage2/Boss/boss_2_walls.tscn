@@ -1,0 +1,260 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqeidet6xom1n"]
+
+[ext_resource type="PackedScene" uid="uid://dw8ov3b7a05fj" path="res://Scenes/Stages/Stage2/Boss/boss_wall_part.tscn" id="1_q31fl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8so0u"]
+size = Vector2(170, 2670)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rtfw"]
+size = Vector2(2670, 170)
+
+[node name="Boss2Walls" type="Node2D"]
+y_sort_enabled = true
+
+[node name="BossWallPart" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1263, -6)
+
+[node name="BossWallPart2" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1239, -120)
+
+[node name="BossWallPart3" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1255, -257)
+
+[node name="BossWallPart4" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1223, -394)
+
+[node name="BossWallPart5" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1274, -476)
+
+[node name="BossWallPart6" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1222, -621)
+
+[node name="BossWallPart7" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1265, -754)
+
+[node name="BossWallPart8" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1232, -874)
+
+[node name="BossWallPart11" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1277, 896)
+
+[node name="BossWallPart12" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1225, 738)
+
+[node name="BossWallPart13" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1281, 607)
+
+[node name="BossWallPart14" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1248, 512)
+
+[node name="BossWallPart15" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1212, 369)
+
+[node name="BossWallPart16" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1270, 241)
+
+[node name="BossWallPart17" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1226, 125)
+
+[node name="BossWallPart18" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1279, 27)
+
+[node name="BossWallPart19" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1223, -119)
+
+[node name="BossWallPart20" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1263, -243)
+
+[node name="BossWallPart21" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1270, -377)
+
+[node name="BossWallPart22" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1221, -492)
+
+[node name="BossWallPart23" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1280, -629)
+
+[node name="BossWallPart24" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1223, -742)
+
+[node name="BossWallPart25" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1255, -882)
+
+[node name="BossWallPart28" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1256, 892)
+
+[node name="BossWallPart29" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1203, 741)
+
+[node name="BossWallPart30" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1272, 634)
+
+[node name="BossWallPart31" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1225, 511)
+
+[node name="BossWallPart32" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1296, 355)
+
+[node name="BossWallPart33" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1220, 256)
+
+[node name="BossWallPart34" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1231, 124)
+
+[node name="BossWallPart35" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-887, -1235)
+
+[node name="BossWallPart36" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-751, -1261)
+
+[node name="BossWallPart37" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-614, -1219)
+
+[node name="BossWallPart38" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-490, -1260)
+
+[node name="BossWallPart39" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-399, -1276)
+
+[node name="BossWallPart40" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-232, -1238)
+
+[node name="BossWallPart41" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-96, -1283)
+
+[node name="BossWallPart42" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-12, -1214)
+
+[node name="BossWallPart43" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(137, -1228)
+
+[node name="BossWallPart44" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(274, -1277)
+
+[node name="BossWallPart45" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(371, -1214)
+
+[node name="BossWallPart46" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(512, -1278)
+
+[node name="BossWallPart47" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(628, -1224)
+
+[node name="BossWallPart48" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(764, -1269)
+
+[node name="BossWallPart49" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(898, -1241)
+
+[node name="BossWallPart50" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-871, 1226)
+
+[node name="BossWallPart51" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-755, 1266)
+
+[node name="BossWallPart52" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-621, 1207)
+
+[node name="BossWallPart53" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-498, 1291)
+
+[node name="BossWallPart54" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-351, 1266)
+
+[node name="BossWallPart55" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-236, 1247)
+
+[node name="BossWallPart56" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-115, 1287)
+
+[node name="BossWallPart57" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(3, 1222)
+
+[node name="BossWallPart58" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(162, 1278)
+
+[node name="BossWallPart59" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(253, 1221)
+
+[node name="BossWallPart60" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(393, 1268)
+
+[node name="BossWallPart61" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(508, 1215)
+
+[node name="BossWallPart62" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(622, 1277)
+
+[node name="BossWallPart63" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(762, 1224)
+
+[node name="BossWallPart64" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(921, 1271)
+
+[node name="BossWallPart9" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1277, -991)
+
+[node name="BossWallPart10" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1276, -1139)
+
+[node name="BossWallPart26" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1028, -1227)
+
+[node name="BossWallPart27" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1165, -1256)
+
+[node name="BossWallPart65" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1030, -1293)
+
+[node name="BossWallPart66" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1163, -1227)
+
+[node name="BossWallPart67" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1320, -1128)
+
+[node name="BossWallPart68" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1195, -1010)
+
+[node name="BossWallPart69" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1037, 1204)
+
+[node name="BossWallPart70" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1126, 1296)
+
+[node name="BossWallPart71" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1275, 1170)
+
+[node name="BossWallPart72" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(1208, 1041)
+
+[node name="BossWallPart73" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1019, 1288)
+
+[node name="BossWallPart74" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1164, 1247)
+
+[node name="BossWallPart75" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1315, 1164)
+
+[node name="BossWallPart76" parent="." instance=ExtResource("1_q31fl")]
+position = Vector2(-1213, 1043)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["BossWalls"]]
+collision_layer = 34
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1250, 0)
+shape = SubResource("RectangleShape2D_8so0u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1250, 0)
+shape = SubResource("RectangleShape2D_8so0u")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1250)
+shape = SubResource("RectangleShape2D_0rtfw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1250)
+shape = SubResource("RectangleShape2D_0rtfw")

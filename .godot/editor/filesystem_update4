@@ -1,0 +1,7 @@
+res://default_env.tres
+res://Scenes/Stages/Stage6/stage_6.tscn
+res://Scenes/Stages/Stage7/stage_7.tscn
+res://Scenes/Stages/Stage6/Enemies/enemy_6.tscn
+res://Scenes/Stages/Stage6/Enemies/frost_6.tscn
+res://Scenes/Stages/Stage6/Enemies/phaser_6.tscn
+res://Scenes/Player/Player.tscn

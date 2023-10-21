@@ -1,0 +1,293 @@
+[gd_scene load_steps=12 format=3 uid="uid://3nt7cu60uj2b"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage1/Boss/boss_1_part.gd" id="1_yujqj"]
+[ext_resource type="PackedScene" uid="uid://dws37q24k1pvk" path="res://Scenes/Stages/Stage1/Boss/boss_1_fragment.tscn" id="2_6o6ok"]
+[ext_resource type="Texture2D" uid="uid://u5n0gk2xbcdf" path="res://Assets/Stages/01/Enemies/Enemy1.png" id="3_j5dt8"]
+[ext_resource type="PackedScene" uid="uid://bxvdltsdlh4xc" path="res://Scenes/Stages/Stage1/Boss/boss_1_fragment_1.tscn" id="3_q8206"]
+[ext_resource type="Texture2D" uid="uid://c5ux7i7eo57ur" path="res://Assets/Stages/01/Enemies/Leader1.png" id="4_6ykur"]
+[ext_resource type="Texture2D" uid="uid://cgaus8rf8q302" path="res://Assets/Stages/01/Boss/BossWalls.png" id="6_nwci7"]
+
+[sub_resource type="Animation" id="Animation_cm0r2"]
+resource_name = "ShakeBossPart"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-35, -56), Vector2(-40, -56), Vector2(-30, -56)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Enemy2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(45, -56), Vector2(40, -56), Vector2(50, -56)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Leader1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(5, -36), Vector2(10, -36), Vector2(0, -36)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Enemy3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-35, 4), Vector2(-40, 4), Vector2(-30, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Enemy4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(45, 4), Vector2(40, 4), Vector2(50, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_goq7y"]
+_data = {
+"ShakeBossPart": SubResource("Animation_cm0r2")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ibknk"]
+radius = 62.0725
+
+[sub_resource type="Animation" id="Animation_ac86x"]
+resource_name = "BounceBossPart"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy1/Enemy1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Enemy1/Enemy1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Enemy2/Enemy2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 1.4),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Enemy2/Enemy2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 1.4),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Leader1/Leader1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.8),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Leader1/Leader1:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8, 1.8),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Enemy3/Enemy3:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6, 1.6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Enemy3/Enemy3:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.6, 1.6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Enemy4/Enemy4:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.2, 1.2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Enemy4/Enemy4:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.2, 1.2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_agy3v"]
+_data = {
+"BounceBossPart": SubResource("Animation_ac86x")
+}
+
+[node name="Boss1Part" type="CharacterBody2D" groups=["BossPart"]]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_yujqj")
+fragment = ExtResource("2_6o6ok")
+fragment1 = ExtResource("3_q8206")
+
+[node name="Enemy1" type="Node2D" parent="."]
+position = Vector2(-35, -56)
+
+[node name="Enemy1" type="Sprite2D" parent="Enemy1"]
+position = Vector2(0, 1.35673)
+scale = Vector2(0.2, 0.194347)
+texture = ExtResource("3_j5dt8")
+
+[node name="Enemy2" type="Node2D" parent="."]
+position = Vector2(50, -56)
+
+[node name="Enemy2" type="Sprite2D" parent="Enemy2"]
+position = Vector2(0, 5.1652)
+scale = Vector2(0.2, 0.178478)
+texture = ExtResource("3_j5dt8")
+
+[node name="Leader1" type="Node2D" parent="."]
+position = Vector2(5, -36)
+
+[node name="Leader1" type="Sprite2D" parent="Leader1"]
+position = Vector2(0, 7.703)
+scale = Vector2(0.2, 0.175928)
+texture = ExtResource("4_6ykur")
+
+[node name="Enemy3" type="Node2D" parent="."]
+position = Vector2(-30, 4)
+
+[node name="Enemy3" type="Sprite2D" parent="Enemy3"]
+position = Vector2(0, 5.95122)
+scale = Vector2(0.2, 0.175203)
+texture = ExtResource("3_j5dt8")
+
+[node name="Enemy4" type="Node2D" parent="."]
+position = Vector2(45, 4)
+
+[node name="Enemy4" type="Sprite2D" parent="Enemy4"]
+position = Vector2(0, 3.41918)
+scale = Vector2(0.2, 0.185753)
+texture = ExtResource("3_j5dt8")
+
+[node name="Shaker" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_goq7y")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ibknk")
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -10)
+lifetime = 0.1
+texture = ExtResource("6_nwci7")
+emission_shape = 1
+emission_sphere_radius = 60.0
+spread = 180.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+radial_accel_min = 46.38
+radial_accel_max = 46.38
+color = Color(1, 1, 1, 0.243137)
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+autoplay = "BounceBossPart"
+libraries = {
+"": SubResource("AnimationLibrary_agy3v")
+}
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]

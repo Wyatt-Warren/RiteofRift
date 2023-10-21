@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://cj1v7e68k7cs0"]
+
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="1_naklx"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage6/frost_6_bullet.gd" id="1_s6y78"]
+[ext_resource type="Texture2D" uid="uid://ckhc8wvpk8kqe" path="res://Assets/Stages/05/Star5.png" id="2_8s58g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0c5b0"]
+radius = 120.0
+
+[sub_resource type="Gradient" id="Gradient_5c23g"]
+offsets = PackedFloat32Array(0, 0.248908, 0.624454, 0.838428, 0.986175)
+colors = PackedColorArray(1, 1, 1, 0, 0.582182, 0.994577, 1, 1, 0, 0.719471, 0.725597, 1, 0.045014, 0.636969, 0.999998, 1, 0, 0.402914, 0.731311, 0)
+
+[sub_resource type="Gradient" id="Gradient_i128b"]
+offsets = PackedFloat32Array(0, 0.133641, 0.861751, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_xoo0l"]
+offsets = PackedFloat32Array(0, 0.391705)
+colors = PackedColorArray(1, 1, 1, 1, 0.666667, 1, 1, 1)
+
+[node name="Frost6Bullet" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_s6y78")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CircleShape2D_0c5b0")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+amount = 48
+local_coords = true
+texture = ExtResource("1_naklx")
+emission_shape = 1
+emission_sphere_radius = 35.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.6
+angle_max = 360.0
+scale_amount_min = 0.15
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_5c23g")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.6
+local_coords = true
+texture = ExtResource("2_8s58g")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -400.0
+angular_velocity_max = 400.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.6
+angle_max = 360.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_i128b")
+color_initial_ramp = SubResource("Gradient_xoo0l")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

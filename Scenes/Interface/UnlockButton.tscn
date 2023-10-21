@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://b25jpdw54guxs"]
+
+[ext_resource type="Texture2D" uid="uid://cn1wefkn2d3dv" path="res://Assets/UI/Level Up Screen/ShotRune.png" id="1_xe8x3"]
+[ext_resource type="Script" path="res://Scenes/Interface/UnlockButton.gd" id="2_vawsn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cxgyb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqpat"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tr3te"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4foc"]
+
+[node name="GrenadeButton" type="Button"]
+custom_minimum_size = Vector2(0, 100)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.54902, 0.478431, 1)
+theme_override_colors/font_focus_color = Color(1, 0.54902, 0.478431, 1)
+theme_override_colors/font_disabled_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cxgyb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jqpat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tr3te")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_p4foc")
+disabled = true
+text = "Unlocks at level 10"
+icon = ExtResource("1_xe8x3")
+icon_alignment = 2
+script = ExtResource("2_vawsn")

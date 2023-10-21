@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdqkj8qu45htr"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/Enemies/moon_5.gd" id="1_6mch1"]
+[ext_resource type="Texture2D" uid="uid://cg8rqireg8d8" path="res://Assets/Stages/05/Enemies/Moon5.png" id="1_be1t3"]
+[ext_resource type="PackedScene" uid="uid://6kn1vbcf4wyd" path="res://Scenes/Stages/Stage5/bullet_5.tscn" id="2_m5jbc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_33rco"]
+radius = 22.0
+
+[node name="Moon5" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 9
+collision_mask = 9
+gravity_scale = 0.0
+linear_damp = 2.0
+script = ExtResource("1_6mch1")
+bullet = ExtResource("2_m5jbc")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_be1t3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_33rco")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 7.0
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_33rco")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

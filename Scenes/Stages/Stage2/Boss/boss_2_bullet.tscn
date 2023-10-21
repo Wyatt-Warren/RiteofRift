@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://plyh717sbri0"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_2_bullet.gd" id="1_uyo8p"]
+[ext_resource type="Texture2D" uid="uid://d1fapq13xicji" path="res://Assets/Stages/02/SporeCloudAlt.png" id="2_p7li1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0wnho"]
+radius = 75.0
+
+[sub_resource type="Gradient" id="Gradient_a6t14"]
+offsets = PackedFloat32Array(0, 0.147465, 0.497696, 0.852535, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.497474, 0.497474, 0.497474, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Boss2Bullet" type="Area2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_uyo8p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0wnho")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 96
+lifetime = 2.0
+local_coords = true
+texture = ExtResource("2_p7li1")
+emission_shape = 2
+emission_sphere_radius = 70.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+orbit_velocity_min = -0.25
+orbit_velocity_max = 0.25
+angle_max = 360.0
+scale_amount_min = 0.2
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_a6t14")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

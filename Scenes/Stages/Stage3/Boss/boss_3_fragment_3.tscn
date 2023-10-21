@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://v3vqwg6rismg"]
+
+[ext_resource type="PackedScene" uid="uid://d1qq0wscg418a" path="res://Scenes/Stages/Stage3/Boss/boss_3_fragment_1.tscn" id="1_4xgx0"]
+[ext_resource type="Texture2D" uid="uid://60vcbxueessw" path="res://Assets/Stages/03/Boss/Fragment3_3.png" id="2_rhtth"]
+
+[node name="Boss3Fragment3" instance=ExtResource("1_4xgx0")]
+
+[node name="EnemySprite" parent="." index="0"]
+position = Vector2(-1, 5)
+texture = ExtResource("2_rhtth")

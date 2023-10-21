@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfbbehj373g84"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage5/Boss/boss_5_fragment_1.gd" id="1_8eqk4"]
+[ext_resource type="Texture2D" uid="uid://c6famk8ocr6ll" path="res://Assets/Stages/03/Boss/Fragment3_1.png" id="1_gbvra"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idoo3"]
+radius = 29.0
+
+[node name="Boss5Fragment1" type="RigidBody2D" groups=["Enemy"]]
+script = ExtResource("1_8eqk4")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.839216, 0.576471, 1)
+position = Vector2(-3, -5)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_gbvra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_idoo3")

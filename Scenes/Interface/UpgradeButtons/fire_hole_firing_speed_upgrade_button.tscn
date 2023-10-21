@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn2p6488y7qjx"]
+
+[ext_resource type="PackedScene" uid="uid://byb2tu6y0kfy4" path="res://Scenes/Interface/UpgradeButtons/upgrade_button.tscn" id="1_ofopn"]
+[ext_resource type="Script" path="res://Scenes/Interface/UpgradeButtons/fire_hole_firing_speed_upgrade_button.gd" id="2_hjiit"]
+[ext_resource type="Texture2D" uid="uid://c5job2ums4r2u" path="res://Assets/UI/Level Up Screen/LaunchRune.png" id="2_vawe7"]
+
+[node name="FireHoleFiringSpeedUpgradeButton" instance=ExtResource("1_ofopn")]
+text = "  Rift Launch Recharge Time"
+icon = ExtResource("2_vawe7")
+script = ExtResource("2_hjiit")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

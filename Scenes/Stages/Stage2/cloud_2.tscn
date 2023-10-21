@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkmkxyok4m4j3"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/cloud_2.gd" id="1_xnhus"]
+[ext_resource type="Texture2D" uid="uid://d1fapq13xicji" path="res://Assets/Stages/02/SporeCloudAlt.png" id="2_kidxf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74l6o"]
+radius = 164.049
+
+[sub_resource type="Gradient" id="Gradient_bxjbh"]
+offsets = PackedFloat32Array(0, 0.147465, 0.497696, 0.852535, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.497474, 0.497474, 0.497474, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Cloud2" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_xnhus")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_74l6o")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 64
+lifetime = 2.0
+local_coords = true
+texture = ExtResource("2_kidxf")
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+scale_amount_min = 0.4
+scale_amount_max = 1.2
+color_ramp = SubResource("Gradient_bxjbh")
+
+[node name="DamageTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_disappear_timer_timeout"]

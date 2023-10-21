@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3 uid="uid://bhklg7flvqu8r"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage6/Enemies/frost_6.gd" id="1_41bx2"]
+[ext_resource type="Texture2D" uid="uid://cua0log3hha0k" path="res://Assets/Misc/Shadow.png" id="1_sf476"]
+[ext_resource type="PackedScene" uid="uid://bptjq8awlcu4c" path="res://Scenes/Stages/Stage6/bullet_6.tscn" id="2_6safi"]
+[ext_resource type="Texture2D" uid="uid://cdtj86udqebje" path="res://Assets/Stages/06/Enemies/Frost6.png" id="2_7gjn8"]
+[ext_resource type="PackedScene" uid="uid://cj1v7e68k7cs0" path="res://Scenes/Stages/Stage6/frost_6_bullet.tscn" id="3_0gbf8"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="4_o80il"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kecwm"]
+radius = 31.0161
+
+[sub_resource type="Animation" id="Animation_2m0tl"]
+resource_name = "Bounce"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(8, -15), Vector2(8, -25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(8, -15), Vector2(8, -25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtklf"]
+_data = {
+"Bounce": SubResource("Animation_2m0tl")
+}
+
+[sub_resource type="Animation" id="Animation_gd6bh"]
+resource_name = "Walking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.139626, 0.139626]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.139626, 0.139626]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vipmi"]
+_data = {
+"Walking": SubResource("Animation_gd6bh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5cvkm"]
+radius = 35.6931
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_32krt"]
+radius = 24.3231
+height = 62.51
+
+[node name="Frost6" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 21
+collision_mask = 21
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_41bx2")
+bullet = ExtResource("2_6safi")
+frostBullet = ExtResource("3_0gbf8")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 35)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_sf476")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(8, -15)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7gjn8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_kecwm")
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+autoplay = "Bounce"
+libraries = {
+"": SubResource("AnimationLibrary_rtklf")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_vipmi")
+}
+
+[node name="RunAwayArea" parent="." instance=ExtResource("4_o80il")]
+visible = false
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 4
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="FrostTimer" type="Timer" parent="."]
+wait_time = 12.0
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(8, -15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-7.17811, 15.1484)
+shape = SubResource("CircleShape2D_5cvkm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(11.819, -26.6141)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_32krt")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="FrostTimer" to="." method="_on_frost_timer_timeout"]

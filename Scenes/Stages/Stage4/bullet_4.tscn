@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyyfgfuvs4qcn"]
+
+[ext_resource type="Texture2D" uid="uid://dje20jrbhf2t3" path="res://Assets/Stages/04/Bullet4.png" id="1_3blw5"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage4/bullet_4.gd" id="1_n6lbj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74nkt"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_1jgd3"]
+resource_name = "Disappear"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet4:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.17, 0.17), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wuvs"]
+_data = {
+"Disappear": SubResource("Animation_1jgd3")
+}
+
+[sub_resource type="Animation" id="Animation_o21db"]
+resource_name = "RotateBullet"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet4:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_224w2"]
+_data = {
+"RotateBullet": SubResource("Animation_o21db")
+}
+
+[sub_resource type="Animation" id="Animation_m5x16"]
+resource_name = "GrowBullet"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet4:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.17, 0.17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y66on"]
+_data = {
+"GrowBullet": SubResource("Animation_m5x16")
+}
+
+[node name="Bullet4" type="Area2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_n6lbj")
+
+[node name="Bullet4" type="Sprite2D" parent="."]
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("1_3blw5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_74nkt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7wuvs")
+}
+
+[node name="Rotator" type="AnimationPlayer" parent="."]
+autoplay = "RotateBullet"
+libraries = {
+"": SubResource("AnimationLibrary_224w2")
+}
+
+[node name="Grower" type="AnimationPlayer" parent="."]
+autoplay = "GrowBullet"
+libraries = {
+"": SubResource("AnimationLibrary_y66on")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

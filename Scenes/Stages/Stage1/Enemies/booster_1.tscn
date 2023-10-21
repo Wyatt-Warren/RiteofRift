@@ -1,0 +1,132 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpjtcgxgpm5s3"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage1/Enemies/booster_1.gd" id="1_qcji8"]
+[ext_resource type="PackedScene" uid="uid://i4gxhrl827bh" path="res://Scenes/booster_particles.tscn" id="2_8pnbc"]
+[ext_resource type="Texture2D" uid="uid://b1vmybtfwwk6t" path="res://Assets/Stages/01/Enemies/Booster1.png" id="3_t671i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dbhb7"]
+radius = 27.0
+
+[sub_resource type="Animation" id="Animation_dj42u"]
+resource_name = "Walking"
+length = 0.75
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(5, -25), Vector2(5, -18.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(5, -25), Vector2(5, -18.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i6gc"]
+_data = {
+"Walking": SubResource("Animation_dj42u")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5rpp"]
+size = Vector2(180, 185)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gc1rc"]
+radius = 130.096
+
+[node name="Booster1" type="RigidBody2D" groups=["Booster", "Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_qcji8")
+
+[node name="BoosterParticles" parent="." instance=ExtResource("2_8pnbc")]
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(5, -25)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_t671i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_dbhb7")
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="FleeTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walking"
+libraries = {
+"": SubResource("AnimationLibrary_7i6gc")
+}
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(5, -25)
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-35, 152.5)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_r5rpp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -60)
+shape = SubResource("CircleShape2D_gc1rc")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="FleeTimer" to="." method="_on_flee_timer_timeout"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

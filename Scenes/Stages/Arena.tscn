@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c17wpcxkbfrdu"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Arena.gd" id="1_n2foq"]
+[ext_resource type="PackedScene" uid="uid://4185xly4ri18" path="res://Scenes/Player/Player.tscn" id="3_gylku"]
+[ext_resource type="PackedScene" uid="uid://xvbc7qbphhuc" path="res://Scenes/EnemySpawnTimer.tscn" id="4_cfjra"]
+[ext_resource type="PackedScene" uid="uid://bnndtkaes0y2g" path="res://Scenes/Interface/interface.tscn" id="5_b7nr6"]
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_n2foq")
+
+[node name="World" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Holes" type="Node2D" parent="World"]
+
+[node name="Player" parent="World" instance=ExtResource("3_gylku")]
+
+[node name="EnemySpawnTimer" parent="World" instance=ExtResource("4_cfjra")]
+
+[node name="WaveChangeTimer" type="Timer" parent="World"]
+wait_time = 120.0
+autostart = true
+
+[node name="Objects" type="Node2D" parent="World"]
+
+[node name="Enemies" type="Node2D" parent="World"]
+y_sort_enabled = true
+
+[node name="Enemy Bullets" type="Node2D" parent="World"]
+
+[node name="Player Bullets" type="Node2D" parent="World"]
+
+[node name="UIOverlay" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Interface" parent="UIOverlay" instance=ExtResource("5_b7nr6")]
+
+[node name="LevelUpOverlay" type="CanvasLayer" parent="."]
+layer = 3

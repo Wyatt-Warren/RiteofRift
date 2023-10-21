@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbsrta84vya0"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage7/confusion_beam_7.gd" id="1_w8ky7"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="1_ymce5"]
+[ext_resource type="Texture2D" uid="uid://st6mygy4xst2" path="res://Assets/Misc/particle0202.png" id="2_1w3wk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3n8u5"]
+radius = 92.1954
+
+[sub_resource type="Gradient" id="Gradient_ddf2t"]
+offsets = PackedFloat32Array(0, 0.115207, 0.78341, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wm55l"]
+offsets = PackedFloat32Array(0, 0.105991, 0.571429, 0.861751, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.978193, 0.978193, 0.978193, 1, 0.552956, 0.552956, 0.552956, 1, 0.321569, 0.321569, 0.321569, 0)
+
+[sub_resource type="Gradient" id="Gradient_s3o66"]
+offsets = PackedFloat32Array(0, 0.769585)
+colors = PackedColorArray(0.840628, 1, 0.82437, 1, 0, 0.94902, 0, 1)
+
+[node name="ConfusionBeam7" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_w8ky7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3n8u5")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+amount = 16
+explosiveness = 0.4
+texture = ExtResource("2_1w3wk")
+emission_shape = 2
+emission_sphere_radius = 20.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 275.0
+initial_velocity_max = 325.0
+angular_velocity_min = -750.0
+angular_velocity_max = 750.0
+orbit_velocity_min = 0.3
+orbit_velocity_max = 0.6
+radial_accel_min = -600.0
+radial_accel_max = -600.0
+angle_max = 360.0
+scale_amount_min = 0.03
+scale_amount_max = 0.06
+color_ramp = SubResource("Gradient_ddf2t")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 96
+explosiveness = 0.75
+texture = ExtResource("1_ymce5")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 275.0
+initial_velocity_max = 325.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+radial_accel_min = -500.0
+radial_accel_max = -500.0
+angle_max = 360.0
+scale_amount_min = 0.12
+scale_amount_max = 0.22
+color_ramp = SubResource("Gradient_wm55l")
+color_initial_ramp = SubResource("Gradient_s3o66")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+amount = 16
+explosiveness = 0.4
+texture = ExtResource("2_1w3wk")
+emission_shape = 2
+emission_sphere_radius = 20.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 275.0
+initial_velocity_max = 325.0
+angular_velocity_min = -750.0
+angular_velocity_max = 750.0
+orbit_velocity_min = 0.3
+orbit_velocity_max = 0.6
+radial_accel_min = -600.0
+radial_accel_max = -600.0
+angle_max = 360.0
+scale_amount_min = 0.03
+scale_amount_max = 0.06
+color_ramp = SubResource("Gradient_ddf2t")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

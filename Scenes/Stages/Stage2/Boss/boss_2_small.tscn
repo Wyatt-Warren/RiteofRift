@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://byy77llg2l04p"]
+
+[ext_resource type="Texture2D" uid="uid://co83vhjg30d4b" path="res://Assets/Stages/02/Boss/BossSmallMushroom.png" id="1_lw5ea"]
+[ext_resource type="Script" path="res://Scenes/Stages/Stage2/Boss/boss_2_small.gd" id="1_otqgw"]
+[ext_resource type="PackedScene" uid="uid://cncnan73k2qmi" path="res://Scenes/Stages/Stage2/bullet_2.tscn" id="2_mljdb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_87j3o"]
+radius = 36.0139
+
+[sub_resource type="Animation" id="Animation_mhoyp"]
+resource_name = "GrowSmall"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 30), Vector2(6, -11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yo6mh"]
+_data = {
+"GrowSmall": SubResource("Animation_mhoyp")
+}
+
+[sub_resource type="Animation" id="Animation_coteg"]
+resource_name = "BounceSmall"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(6, -11), Vector2(6, -5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.175)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w0jg5"]
+_data = {
+"BounceSmall": SubResource("Animation_coteg")
+}
+
+[node name="Boss2Small" type="RigidBody2D" groups=["Enemy", "SmallMushroom"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_otqgw")
+bullet = ExtResource("2_mljdb")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(6, -10.4362)
+scale = Vector2(0.2, 0.197651)
+texture = ExtResource("1_lw5ea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_87j3o")
+
+[node name="Grower" type="AnimationPlayer" parent="."]
+autoplay = "GrowSmall"
+libraries = {
+"": SubResource("AnimationLibrary_yo6mh")
+}
+
+[node name="Bouncer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w0jg5")
+}
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="animation_finished" from="Grower" to="." method="_on_grower_animation_finished"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

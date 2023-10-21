@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://4185xly4ri18"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_ceu2q"]
+[ext_resource type="PackedScene" uid="uid://cmjj6sgkvsrb6" path="res://Scenes/Player/Grenade.tscn" id="2_12x6q"]
+[ext_resource type="PackedScene" uid="uid://bw6y23w8mhnus" path="res://Scenes/Player/Sucker.tscn" id="2_jyp4o"]
+[ext_resource type="PackedScene" uid="uid://u4git7sw05qg" path="res://Scenes/Player/PlayerBody.tscn" id="3_yvi8a"]
+[ext_resource type="PackedScene" uid="uid://3w0lddk5yune" path="res://Scenes/Player/MouseHole.tscn" id="4_0s1hn"]
+[ext_resource type="PackedScene" uid="uid://pwj3mr3f8kmi" path="res://Scenes/Player/fire_hole.tscn" id="5_5ocn3"]
+[ext_resource type="PackedScene" uid="uid://hvjgou0g2epr" path="res://Scenes/run_away_area.tscn" id="5_7evdg"]
+[ext_resource type="PackedScene" uid="uid://dugijelfcsiub" path="res://Scenes/Interface/level_up_window.tscn" id="6_wmmto"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0py2l"]
+radius = 56.0
+height = 144.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up68o"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr042"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ofg7"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource("1_ceu2q")
+sucker = ExtResource("2_jyp4o")
+grenade = ExtResource("2_12x6q")
+mouseHole = ExtResource("4_0s1hn")
+fireHole = ExtResource("5_5ocn3")
+levelUpScreen = ExtResource("6_wmmto")
+
+[node name="PlayerBody" parent="." instance=ExtResource("3_yvi8a")]
+
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="FireTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RegenTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="LevelUpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="BoostModeTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="SlowTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Suckers" type="Node2D" parent="."]
+
+[node name="RunAwayArea" parent="Suckers" instance=ExtResource("5_7evdg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0py2l")
+
+[node name="GrenadeBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 2
+offset_left = -75.0
+offset_top = 70.0
+offset_right = 75.0
+offset_bottom = 74.0
+theme_override_styles/background = SubResource("StyleBoxFlat_up68o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sr042")
+step = 0.001
+show_percentage = false
+
+[node name="BoostBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 2
+offset_left = -75.0
+offset_top = -70.0
+offset_right = 75.0
+offset_bottom = -66.0
+theme_override_styles/background = SubResource("StyleBoxFlat_up68o")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4ofg7")
+step = 0.001
+show_percentage = false
+
+[connection signal="enemy_eaten" from="PlayerBody" to="." method="_on_player_body_enemy_eaten"]
+[connection signal="got_shot" from="PlayerBody" to="." method="_on_player_body_got_shot"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]
+[connection signal="timeout" from="LevelUpTimer" to="." method="_on_level_up_timer_timeout"]
+[connection signal="timeout" from="BoostModeTimer" to="." method="_on_boost_mode_timer_timeout"]

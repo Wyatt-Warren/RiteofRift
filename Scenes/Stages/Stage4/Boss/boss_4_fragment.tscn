@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://csyg3wklbkhk0"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage4/Boss/boss_4_fragment.gd" id="1_hikcy"]
+[ext_resource type="Texture2D" uid="uid://bdvy24x1x5my" path="res://Assets/Stages/04/Eyeball4.png" id="1_tuem7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ab4kv"]
+radius = 15.0
+
+[node name="Boss4Fragment" type="RigidBody2D" groups=["Enemy"]]
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_hikcy")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(-1, 1)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("1_tuem7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_ab4kv")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ab4kv")

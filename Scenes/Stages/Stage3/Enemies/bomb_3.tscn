@@ -1,0 +1,285 @@
+[gd_scene load_steps=27 format=3 uid="uid://brsigomehtq70"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/Stage3/Enemies/bomb_3.gd" id="1_yiye3"]
+[ext_resource type="Texture2D" uid="uid://rml7le11dtjs" path="res://Assets/Stages/03/Enemies/bomb3_0001.png" id="2_1w5jy"]
+[ext_resource type="PackedScene" uid="uid://degit5f8l2qo7" path="res://Scenes/Stages/Stage3/bullet_3.tscn" id="2_ol8ma"]
+[ext_resource type="Texture2D" uid="uid://5atxwkmslv1a" path="res://Assets/Stages/03/Enemies/bomb3_0002.png" id="3_881o8"]
+[ext_resource type="Texture2D" uid="uid://cua0log3hha0k" path="res://Assets/Misc/Shadow.png" id="3_ahp0r"]
+[ext_resource type="Texture2D" uid="uid://duqstghi3gvbq" path="res://Assets/Stages/03/Enemies/bomb3_0003.png" id="4_e7rjf"]
+[ext_resource type="Texture2D" uid="uid://xyvyo0uy7s3y" path="res://Assets/Stages/03/Enemies/bomb3_0004.png" id="5_k8ja4"]
+[ext_resource type="Texture2D" uid="uid://cnidn8ohdr483" path="res://Assets/Stages/03/Enemies/bomb3_0005.png" id="6_gh3j1"]
+[ext_resource type="Texture2D" uid="uid://cwkktxge0qg5i" path="res://Assets/Stages/03/Enemies/bomb3_0006.png" id="7_orhhj"]
+[ext_resource type="Texture2D" uid="uid://1ibbumvl00sy" path="res://Assets/Stages/03/Enemies/bomb3_0007.png" id="8_xhkrm"]
+[ext_resource type="Texture2D" uid="uid://dddmdcn6lsw0f" path="res://Assets/Stages/03/Enemies/bomb3_0008.png" id="9_rq7io"]
+[ext_resource type="Texture2D" uid="uid://c74qejsk8lrqt" path="res://Assets/Stages/03/Enemies/bomb3_0009.png" id="10_8wpvs"]
+[ext_resource type="Texture2D" uid="uid://cxpltc5e3vyq4" path="res://Assets/Stages/03/Enemies/bomb3_0010.png" id="11_02xhk"]
+[ext_resource type="Texture2D" uid="uid://b587nkw3vmgps" path="res://Assets/Stages/03/Enemies/bomb3_0011.png" id="12_g6as8"]
+[ext_resource type="Texture2D" uid="uid://bh4qoyjjeo775" path="res://Assets/Stages/03/Enemies/bomb3_0012.png" id="13_jrw6x"]
+[ext_resource type="Texture2D" uid="uid://bu22uylk5n617" path="res://Assets/Misc/FireBlur.png" id="16_3vw1x"]
+[ext_resource type="Texture2D" uid="uid://ckc6ttb15nrwh" path="res://Assets/Stages/03/Fragment3.png" id="16_bncnl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3pk55"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1w5jy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_881o8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e7rjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k8ja4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gh3j1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_orhhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xhkrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rq7io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8wpvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_02xhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_g6as8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jrw6x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vuble"]
+radius = 29.6142
+
+[sub_resource type="Gradient" id="Gradient_gxm3g"]
+offsets = PackedFloat32Array(0.603687, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_i460v"]
+offsets = PackedFloat32Array(0.465438, 1)
+colors = PackedColorArray(0.619608, 0.239216, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_c0ljv"]
+offsets = PackedFloat32Array(0, 0.0737327, 0.276498, 0.599078, 0.769585, 0.986175)
+colors = PackedColorArray(1, 0.897324, 0.741695, 0, 1, 1, 1, 1, 0.99754, 0.654204, 3.85046e-07, 1, 0.965097, 0.291155, 0, 1, 0.984314, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_t7gt7"]
+resource_name = "TickBomb"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0, -18), Vector2(0, -22)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.22, 0.22)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(0.619608, 0.239216, 1, 1), Color(1, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemySprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(0.619608, 0.239216, 1, 1), Color(1, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0, -18), Vector2(0, -22)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hitbox:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.22, 0.22)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drvs6"]
+_data = {
+"TickBomb": SubResource("Animation_t7gt7")
+}
+
+[sub_resource type="Animation" id="Animation_oofdo"]
+resource_name = "AccelerateBombSpeed"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer:speed_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [1.0, 16.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ryi4"]
+_data = {
+"AccelerateBombSpeed": SubResource("Animation_oofdo")
+}
+
+[node name="Bomb3" type="RigidBody2D" groups=["Enemy"]]
+collision_layer = 25
+collision_mask = 25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_yiye3")
+bullet = ExtResource("2_ol8ma")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 36)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_ahp0r")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.619608, 0.239216, 1, 1)
+position = Vector2(0, -18)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_e7rjf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.619608, 0.239216, 1, 1)
+position = Vector2(0, -18)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_3pk55")
+autoplay = "default"
+frame_progress = 0.192405
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_vuble")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 96
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("16_bncnl")
+emission_shape = 1
+emission_sphere_radius = 50.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 350.0
+initial_velocity_max = 450.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.15
+color_ramp = SubResource("Gradient_gxm3g")
+color_initial_ramp = SubResource("Gradient_i460v")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.6
+texture = ExtResource("16_3vw1x")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 600.0
+initial_velocity_max = 750.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color_ramp = SubResource("Gradient_c0ljv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "TickBomb"
+libraries = {
+"": SubResource("AnimationLibrary_drvs6")
+}
+
+[node name="Accelerator" type="AnimationPlayer" parent="."]
+autoplay = "AccelerateBombSpeed"
+libraries = {
+"": SubResource("AnimationLibrary_2ryi4")
+}
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="DeleteTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="." groups=["EnemyHitbox"]]
+visible = false
+position = Vector2(0, -18)
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(0, 235, 200, 125, 210, -95, 0, -235, -200, -95, -200, 120)
+
+[connection signal="animation_finished" from="Accelerator" to="." method="_on_accelerator_animation_finished"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
